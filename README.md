@@ -5,17 +5,17 @@ Tannin is a [gettext](https://www.gnu.org/software/gettext/) localization librar
 
 Inspired by Jed, it is built to be largely compatible with Jed-formatted locale data, and even offers a [Jed drop-in replacement compatibility shim](#jed-compatibility) to easily convert an existing project. Contrasted with Jed, it is more heavily optimized for performance and bundle size. While Jed works well with one-off translations, it suffers in single-page applications with repeated rendering of elements. Using Tannin, you can expect a bundle size **20% that of Jed** (**936 bytes gzipped**) and upwards of **330x better performance** ([see benchmarks](#benchmarks)). It does so without sacrificing the safety of plural forms evaluation, using a hand-crafted expression parser in place of the verbose compiled grammar included in Jed.
 
-Furthermore, the project is architected as a mono-repo, published on npm under the `@tannin` scope. These modules can be used standalone, with or without Tannin. For example, you may find value in [`@tannin/compile`](https://www.npmjs.com/packages/@tannin/compile) for creating an expression evaluator, or [`@tannin/sprintf`](https://www.npmjs.com/packages/@tannin/sprintf) as a minimal [printf](https://en.wikipedia.org/wiki/Printf_format_string) string formatter.
+Furthermore, the project is architected as a mono-repo, published on npm under the `@tannin` scope. These modules can be used standalone, with or without Tannin. For example, you may find value in [`@tannin/compile`](https://www.npmjs.com/package/@tannin/compile) for creating an expression evaluator, or [`@tannin/sprintf`](https://www.npmjs.com/package/@tannin/sprintf) as a minimal [printf](https://en.wikipedia.org/wiki/Printf_format_string) string formatter.
 
 The following modules are available:
 
-- [`tannin/compat`](https://www.npmjs.com/packages/@tannin/compat)
-- [`tannin/compile`](https://www.npmjs.com/packages/@tannin/compile)
-- [`tannin/evaluate`](https://www.npmjs.com/packages/@tannin/evaluate)
-- [`tannin/plural-forms`](https://www.npmjs.com/packages/@tannin/plural-forms)
-- [`tannin/compat`](https://www.npmjs.com/packages/@tannin/compat)
-- [`tannin/postfix`](https://www.npmjs.com/packages/@tannin/postfix)
-- [`tannin/sprintf`](https://www.npmjs.com/packages/@tannin/sprintf)
+- [`tannin/compat`](https://www.npmjs.com/package/@tannin/compat)
+- [`tannin/compile`](https://www.npmjs.com/package/@tannin/compile)
+- [`tannin/evaluate`](https://www.npmjs.com/package/@tannin/evaluate)
+- [`tannin/plural-forms`](https://www.npmjs.com/package/@tannin/plural-forms)
+- [`tannin/compat`](https://www.npmjs.com/package/@tannin/compat)
+- [`tannin/postfix`](https://www.npmjs.com/package/@tannin/postfix)
+- [`tannin/sprintf`](https://www.npmjs.com/package/@tannin/sprintf)
 
 ## Installation
 
@@ -31,7 +31,9 @@ Otherwise, download a pre-built copy from unpkg:
 
 ## Usage
 
-Construct a new instance of `Tannin`, passing locale data as a [Jed-formatted JSON object](http://messageformat.github.io/Jed/). The returned `Tannin` instance includes the fully-qualified `dcnpgettext` function to retrieve a translated string.
+Construct a new instance of `Tannin`, passing locale data in the form of a [Jed-formatted JSON object](http://messageformat.github.io/Jed/).
+
+The returned `Tannin` instance includes the fully-qualified `dcnpgettext` function to retrieve a translated string.
 
 ```js
 import Tannin from 'tannin';
