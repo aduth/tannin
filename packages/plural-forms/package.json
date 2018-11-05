@@ -1,6 +1,6 @@
 {
   "name": "@tannin/plural-forms",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Compiles a function to compute the plural forms index for a given value",
   "main": "build/index.js",
   "module": "index.js",

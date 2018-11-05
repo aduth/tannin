@@ -1,6 +1,6 @@
 {
   "name": "tannin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "gettext localization library compatible with Jed-formatted locale data",
   "main": "build/index.js",
   "module": "index.js",
