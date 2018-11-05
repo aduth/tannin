@@ -1,0 +1,43 @@
+{
+  "name": "@tannin/compat",
+  "version": "1.0.0",
+  "description": "Jed drop-in replacement shim for Tannin",
+  "main": "build/index.js",
+  "module": "index.js",
+  "moduleName": "Jed",
+  "keywords": [
+    "jed",
+    "gettext",
+    "localization",
+    "internationalization",
+    "l10n",
+    "i18n",
+    "translate"
+  ],
+  "author": {
+    "name": "Andrew Duthie",
+    "email": "andrew@andrewduthie.com",
+    "url": "https://andrewduthie.com"
+  },
+  "homepage": "https://github.com/aduth/tannin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aduth/tannin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aduth/tannin/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "build",
+    "dist"
+  ],
+  "dependencies": {
+    "tannin": "file:../tannin",
+    "@tannin/sprintf": "file:../sprintf"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

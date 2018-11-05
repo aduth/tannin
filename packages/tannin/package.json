@@ -1,0 +1,48 @@
+{
+  "name": "tannin",
+  "version": "1.0.0",
+  "description": "gettext localization library compatible with Jed-formtted locale data",
+  "main": "build/index.js",
+  "module": "index.js",
+  "scripts": {
+    "prepublishOnly": "cp ../../README.md README.md"
+  },
+  "keywords": [
+    "jed",
+    "gettext",
+    "localization",
+    "internationalization",
+    "l10n",
+    "i18n",
+    "translate"
+  ],
+  "author": {
+    "name": "Andrew Duthie",
+    "email": "andrew@andrewduthie.com",
+    "url": "https://andrewduthie.com"
+  },
+  "homepage": "https://github.com/aduth/tannin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aduth/tannin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aduth/tannin/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "build",
+    "dist"
+  ],
+  "dependencies": {
+    "@tannin/plural-forms": "file:../plural-forms"
+  },
+  "devDependencies": {
+    "benchmark": "^2.1.4",
+    "jed": "^1.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,13 @@
+{
+	"root": true,
+	"extends": "@aduth/eslint-config",
+	"parserOptions": {
+		"ecmaVersion": 6,
+		"sourceType": "script"
+	},
+	"env": {
+		"es6": true,
+		"node": true,
+		"jest": true
+	}
+}
