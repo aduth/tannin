@@ -9,13 +9,13 @@ Furthermore, the project is architected as a mono-repo, published on npm under t
 
 The following modules are available:
 
-- [`tannin/compat`](https://www.npmjs.com/package/@tannin/compat)
-- [`tannin/compile`](https://www.npmjs.com/package/@tannin/compile)
-- [`tannin/evaluate`](https://www.npmjs.com/package/@tannin/evaluate)
-- [`tannin/plural-forms`](https://www.npmjs.com/package/@tannin/plural-forms)
-- [`tannin/compat`](https://www.npmjs.com/package/@tannin/compat)
-- [`tannin/postfix`](https://www.npmjs.com/package/@tannin/postfix)
-- [`tannin/sprintf`](https://www.npmjs.com/package/@tannin/sprintf)
+- [`@tannin/compat`](https://www.npmjs.com/package/@tannin/compat)
+- [`@tannin/compile`](https://www.npmjs.com/package/@tannin/compile)
+- [`@tannin/evaluate`](https://www.npmjs.com/package/@tannin/evaluate)
+- [`@tannin/plural-forms`](https://www.npmjs.com/package/@tannin/plural-forms)
+- [`@tannin/compat`](https://www.npmjs.com/package/@tannin/compat)
+- [`@tannin/postfix`](https://www.npmjs.com/package/@tannin/postfix)
+- [`@tannin/sprintf`](https://www.npmjs.com/package/@tannin/sprintf)
 
 ## Installation
 
