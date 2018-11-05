@@ -37,7 +37,7 @@
     "dist"
   ],
   "dependencies": {
-    "@tannin/plural-forms": "file:../plural-forms"
+    "@tannin/plural-forms": "^1.0.0"
   },
   "devDependencies": {
     "benchmark": "^2.1.4",
