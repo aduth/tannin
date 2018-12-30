@@ -13,7 +13,7 @@ npm install @tannin/compat
 
 Otherwise, download a pre-built copy from unpkg:
 
-[https://unpkg.com/@tannin/compat/dist/@tannin/compat.min.js](https://unpkg.com/@tannin/compat/dist/@tannin/compat.min.js)
+[https://unpkg.com/@tannin/compat/dist/compat.min.js](https://unpkg.com/@tannin/compat/dist/compat.min.js)
 
 ## Usage
 

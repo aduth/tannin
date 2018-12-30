@@ -13,7 +13,7 @@ npm install @tannin/evaluate
 
 Otherwise, download a pre-built copy from unpkg:
 
-[https://unpkg.com/@tannin/evaluate/dist/@tannin/evaluate.min.js](https://unpkg.com/@tannin/evaluate/dist/@tannin/evaluate.min.js)
+[https://unpkg.com/@tannin/evaluate/dist/evaluate.min.js](https://unpkg.com/@tannin/evaluate/dist/evaluate.min.js)
 
 ## Usage
 

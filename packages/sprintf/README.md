@@ -27,7 +27,7 @@ npm install @tannin/sprintf
 
 Otherwise, download a pre-built copy from unpkg:
 
-[https://unpkg.com/@tannin/sprintf/dist/@tannin/sprintf.min.js](https://unpkg.com/@tannin/sprintf/dist/@tannin/sprintf.min.js)
+[https://unpkg.com/@tannin/sprintf/dist/sprintf.min.js](https://unpkg.com/@tannin/sprintf/dist/sprintf.min.js)
 
 ## Usage
 

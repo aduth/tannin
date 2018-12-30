@@ -15,7 +15,7 @@ npm install @tannin/postfix
 
 Otherwise, download a pre-built copy from unpkg:
 
-[https://unpkg.com/@tannin/postfix/dist/@tannin/postfix.min.js](https://unpkg.com/@tannin/postfix/dist/@tannin/postfix.min.js)
+[https://unpkg.com/@tannin/postfix/dist/postfix.min.js](https://unpkg.com/@tannin/postfix/dist/postfix.min.js)
 
 ## Usage
 

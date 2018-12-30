@@ -13,7 +13,7 @@ npm install @tannin/compile
 
 Otherwise, download a pre-built copy from unpkg:
 
-[https://unpkg.com/@tannin/compile/dist/@tannin/compile.min.js](https://unpkg.com/@tannin/compile/dist/@tannin/compile.min.js)
+[https://unpkg.com/@tannin/compile/dist/compile.min.js](https://unpkg.com/@tannin/compile/dist/compile.min.js)
 
 ## Usage
 

@@ -15,7 +15,7 @@ npm install @tannin/plural-forms
 
 Otherwise, download a pre-built copy from unpkg:
 
-[https://unpkg.com/@tannin/plural-forms/dist/@tannin/plural-forms.min.js](https://unpkg.com/@tannin/plural-forms/dist/@tannin/plural-forms.min.js)
+[https://unpkg.com/@tannin/plural-forms/dist/plural-forms.min.js](https://unpkg.com/@tannin/plural-forms/dist/plural-forms.min.js)
 
 ## Usage
 
