@@ -78,19 +78,22 @@ var OPERATORS = {
  */
 export default function evaluate( postfix, variables ) {
 	var stack = [],
-		i, getOperatorResult, term, value;
+		i, j, args, getOperatorResult, term, value;
 
 	for ( i = 0; i < postfix.length; i++ ) {
 		term = postfix[ i ];
 
 		getOperatorResult = OPERATORS[ term ];
 		if ( getOperatorResult ) {
+			// Pop from stack by number of function arguments.
+			j = getOperatorResult.length;
+			args = Array( j );
+			while ( j-- ) {
+				args[ j ] = stack.pop();
+			}
+
 			try {
-				// Pop from stack by number of function arguments.
-				value = getOperatorResult.apply(
-					null,
-					stack.splice( -1 * getOperatorResult.length )
-				);
+				value = getOperatorResult.apply( null, args );
 			} catch ( earlyReturn ) {
 				return earlyReturn;
 			}

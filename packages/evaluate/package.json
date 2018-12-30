@@ -26,5 +26,8 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "benchmark": "^2.1.4"
   }
 }
