@@ -91,6 +91,15 @@ Jed - Singular (Untranslated) x 184,813 ops/sec ±0.64% (92 runs sampled)
 Jed - Plural x 182,830 ops/sec ±0.54% (95 runs sampled)
 ```
 
+To run benchmarks on your own machine:
+
+```
+git clone https://github.com/aduth/tannin.git
+cd tannin
+npm install
+node packages/tannin/benchmark
+```
+
 ## License
 
 Copyright 2018 Andrew Duthie
