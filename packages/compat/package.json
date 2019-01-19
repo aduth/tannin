@@ -1,6 +1,6 @@
 {
   "name": "@tannin/compat",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Jed drop-in replacement shim for Tannin",
   "main": "build/index.js",
   "module": "index.js",

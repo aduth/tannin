@@ -1,6 +1,6 @@
 {
   "name": "@tannin/postfix",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert a C expression to an array of postfix terms",
   "main": "build/index.js",
   "module": "index.js",
