@@ -12,12 +12,24 @@
   "license": "MIT",
   "devDependencies": {
     "@aduth/eslint-config": "^3.0.0",
+    "benchmark": "^2.1.4",
     "eslint": "^5.8.0",
     "eslint-plugin-jsdoc": "^3.9.1",
+    "jed": "^1.1.1",
     "jest": "^23.6.0",
+    "lerna": "^3.10.6",
     "lodash-es": "^4.17.11",
     "rollup": "^0.66.6",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-uglify": "^6.0.0"
+  },
+  "dependencies": {
+    "@tannin/compat": "file:packages/compat",
+    "@tannin/compile": "file:packages/compile",
+    "@tannin/evaluate": "file:packages/evaluate",
+    "@tannin/plural-forms": "file:packages/plural-forms",
+    "@tannin/postfix": "file:packages/postfix",
+    "@tannin/sprintf": "file:packages/sprintf",
+    "tannin": "file:packages/tannin"
   }
 }

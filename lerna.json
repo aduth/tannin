@@ -1,0 +1,9 @@
+{
+	"packages": [
+		"packages/*"
+	],
+	"ignoreChanges": [
+		"**/CHANGELOG.md"
+	],
+	"version": "independent"
+}

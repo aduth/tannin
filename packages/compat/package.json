@@ -34,8 +34,8 @@
     "dist"
   ],
   "dependencies": {
-    "tannin": "^1.0.0",
-    "@tannin/sprintf": "^1.0.0"
+    "@tannin/sprintf": "file:../sprintf",
+    "tannin": "file:../tannin"
   },
   "publishConfig": {
     "access": "public"
