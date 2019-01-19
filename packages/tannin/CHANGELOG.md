@@ -1,3 +1,13 @@
+## 1.0.2 (2019-01-19)
+
+Documentation
+
+- Correct documentation unpkg links
+
+Internal
+
+- Use Lerna for managing mono-repo
+
 ## 1.0.1 (2018-11-04)
 
 Bug Fixes
