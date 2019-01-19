@@ -83,12 +83,12 @@ i18n.translate( 'example' ).fetch();
 The following benchmarks are performed in Node 10.12.0 on a MacBook Pro (Late 2016), 2.9 GHz Intel Core i7.
 
 ```
-Tannin - Singular x 146,023,999 ops/sec ±0.34% (90 runs sampled)
-Tannin - Singular (Untranslated) x 54,405,357 ops/sec ±0.47% (92 runs sampled)
-Tannin - Plural x 3,379,412 ops/sec ±0.66% (92 runs sampled)
-Jed - Singular x 43,846,111 ops/sec ±0.38% (91 runs sampled)
-Jed - Singular (Untranslated) x 183,668 ops/sec ±0.85% (94 runs sampled)
-Jed - Plural x 181,680 ops/sec ±0.55% (89 runs sampled)
+Tannin - Singular x 150,234,530 ops/sec ±0.65% (90 runs sampled)
+Tannin - Singular (Untranslated) x 53,480,670 ops/sec ±0.66% (92 runs sampled)
+Tannin - Plural x 5,480,067 ops/sec ±0.24% (96 runs sampled)
+Jed - Singular x 38,802,476 ops/sec ±0.74% (93 runs sampled)
+Jed - Singular (Untranslated) x 184,813 ops/sec ±0.64% (92 runs sampled)
+Jed - Plural x 182,830 ops/sec ±0.54% (95 runs sampled)
 ```
 
 ## License
