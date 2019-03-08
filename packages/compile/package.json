@@ -1,6 +1,6 @@
 {
   "name": "@tannin/compile",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Compiles an evaluating function for a C expression",
   "main": "build/index.js",
   "module": "index.js",
