@@ -9,6 +9,7 @@ Furthermore, the project is architected as a mono-repo, published on npm under t
 
 The following modules are available:
 
+- [`tannin`](https://www.npmjs.com/package/tannin)
 - [`@tannin/compat`](https://www.npmjs.com/package/@tannin/compat)
 - [`@tannin/compile`](https://www.npmjs.com/package/@tannin/compile)
 - [`@tannin/evaluate`](https://www.npmjs.com/package/@tannin/evaluate)
