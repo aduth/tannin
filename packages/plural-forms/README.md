@@ -33,6 +33,6 @@ evaluate( 1 );
 
 ## License
 
-Copyright 2018 Andrew Duthie
+Copyright 2019 Andrew Duthie
 
 Released under the [MIT License](https://opensource.org/licenses/MIT).
