@@ -1,3 +1,9 @@
+## 1.1.1 (Unreleased)
+
+Internal
+
+- Add `repository.directory` to `package.json`
+
 ## 1.1.0 (2019-01-19)
 
 Improvements

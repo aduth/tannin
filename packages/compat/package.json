@@ -22,7 +22,8 @@
   "homepage": "https://github.com/aduth/tannin",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aduth/tannin.git"
+    "url": "https://github.com/aduth/tannin.git",
+    "directory": "packages/compat"
   },
   "bugs": {
     "url": "https://github.com/aduth/tannin/issues"
