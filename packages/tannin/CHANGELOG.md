@@ -1,4 +1,8 @@
-## 1.0.3 (Unreleased)
+## 1.1.0 (Unreleased)
+
+New Features
+
+- Domain `plural_forms` can now be passed as a function.
 
 Internal
 

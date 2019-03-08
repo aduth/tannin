@@ -77,17 +77,28 @@ export default function Tannin( data, options ) {
  */
 Tannin.prototype.getPluralForm = function( domain, n ) {
 	var getPluralForm = this.pluralForms[ domain ],
-		config, plural;
+		config, plural, pf;
 
 	if ( ! getPluralForm ) {
 		config = this.data[ domain ][ '' ];
-		plural = getPluralExpression(
+
+		pf = (
 			config[ 'Plural-Forms' ] ||
 			config[ 'plural-forms' ] ||
 			config.plural_forms
 		);
 
-		getPluralForm = this.pluralForms[ domain ] = pluralForms( plural );
+		if ( typeof pf !== 'function' ) {
+			plural = getPluralExpression(
+				config[ 'Plural-Forms' ] ||
+				config[ 'plural-forms' ] ||
+				config.plural_forms
+			);
+
+			pf = pluralForms( plural );
+		}
+
+		getPluralForm = this.pluralForms[ domain ] = pf;
 	}
 
 	return getPluralForm( n );

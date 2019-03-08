@@ -21,6 +21,19 @@ const localeData = {
 		() => new Tannin( localeData ),
 	],
 	[
+		'Tannin (Optimized Default)',
+		() => new Tannin( {
+			...localeData,
+			default: {
+				...localeData.default,
+				'': {
+					...localeData.default[ '' ],
+					plural_forms: ( n ) => n === 1 ? 0 : 1,
+				},
+			},
+		} ),
+	],
+	[
 		'Jed',
 		() => new Jed( {
 			locale_data: localeData,

@@ -3,7 +3,7 @@ Tannin
 
 Tannin is a [gettext](https://www.gnu.org/software/gettext/) localization library.
 
-Inspired by [Jed](https://github.com/messageformat/Jed), it is built to be largely compatible with Jed-formatted locale data, and even offers a [Jed drop-in replacement compatibility shim](#jed-compatibility) to easily convert an existing project. Contrasted with Jed, it is more heavily optimized for performance and bundle size. While Jed works well with one-off translations, it suffers in single-page applications with repeated rendering of elements. Using Tannin, you can expect a bundle size **20% that of Jed** (**936 bytes gzipped**) and upwards of **330x better performance** ([see benchmarks](#benchmarks)). It does so without sacrificing the safety of plural forms evaluation, using a hand-crafted expression parser in place of the verbose compiled grammar included in Jed.
+Inspired by [Jed](https://github.com/messageformat/Jed), it is built to be largely compatible with Jed-formatted locale data, and even offers a [Jed drop-in replacement compatibility shim](#jed-compatibility) to easily convert an existing project. Contrasted with Jed, it is more heavily optimized for performance and bundle size. While Jed works well with one-off translations, it suffers in single-page applications with repeated rendering of elements. Using Tannin, you can expect a bundle size **20% that of Jed** (**975 bytes gzipped**) and upwards of **330x better performance** ([see benchmarks](#benchmarks)). It does so without sacrificing the safety of plural forms evaluation, using a hand-crafted expression parser in place of the verbose compiled grammar included in Jed.
 
 Furthermore, the project is architected as a mono-repo, published on npm under the `@tannin` scope. These modules can be used standalone, with or without Tannin. For example, you may find value in [`@tannin/compile`](https://www.npmjs.com/package/@tannin/compile) for creating an expression evaluator, or [`@tannin/sprintf`](https://www.npmjs.com/package/@tannin/sprintf) as a minimal [printf](https://en.wikipedia.org/wiki/Printf_format_string) string formatter.
 
@@ -54,6 +54,27 @@ i18n.dcnpgettext( 'the_domain', undefined, 'example' );
 // ⇒ 'singular translation'
 ```
 
+Tannin accepts `plural_forms` both as a standard [gettext plural forms string](https://www.gnu.org/software/gettext/manual/html_node/Plural-forms.html) or as a function which, given a number, should return the (zero-based) plural form index. Providing `plural_forms` as a function can yield a performance gain of approximately 8x for plural evaluation.
+
+For example, consider the following "default" English (untranslated) initialization:
+
+```js
+const i18n = new Tannin( {
+	messages: {
+		'': {
+			domain: 'messages',
+			plural_forms: ( n ) => n === 1 ? 0 : 1,
+		},
+	},
+} );
+
+i18n.dcnpgettext( 'messages', undefined, 'example', 'examples', 1 );
+// ⇒ 'example'
+
+i18n.dcnpgettext( 'messages', undefined, 'example', 'examples', 2 );
+// ⇒ 'examples'
+```
+
 ## Jed Compatibility
 
 For a more human-friendly API, or to more easily transition an existing project, consider using [`@tannin/compat`](https://www.npmjs.com/package/@tannin/compat) as a drop-in replacement for Jed.
@@ -84,12 +105,15 @@ i18n.translate( 'example' ).fetch();
 The following benchmarks are performed in Node 10.12.0 on a MacBook Pro (Late 2016), 2.9 GHz Intel Core i7.
 
 ```
-Tannin - Singular x 150,234,530 ops/sec ±0.65% (90 runs sampled)
-Tannin - Singular (Untranslated) x 53,480,670 ops/sec ±0.66% (92 runs sampled)
-Tannin - Plural x 5,480,067 ops/sec ±0.24% (96 runs sampled)
-Jed - Singular x 38,802,476 ops/sec ±0.74% (93 runs sampled)
-Jed - Singular (Untranslated) x 184,813 ops/sec ±0.64% (92 runs sampled)
-Jed - Plural x 182,830 ops/sec ±0.54% (95 runs sampled)
+Tannin - Singular x 141,717,969 ops/sec ±1.52% (84 runs sampled)
+Tannin - Singular (Untranslated) x 53,357,319 ops/sec ±1.23% (92 runs sampled)
+Tannin - Plural x 4,376,066 ops/sec ±1.19% (89 runs sampled)
+Tannin (Optimized Default) - Singular x 53,981,311 ops/sec ±1.79% (87 runs sampled)
+Tannin (Optimized Default) - Singular (Untranslated) x 52,088,249 ops/sec ±0.79% (89 runs sampled)
+Tannin (Optimized Default) - Plural x 33,424,574 ops/sec ±0.98% (89 runs sampled)
+Jed - Singular x 39,358,277 ops/sec ±1.11% (92 runs sampled)
+Jed - Singular (Untranslated) x 180,212 ops/sec ±1.47% (90 runs sampled)
+Jed - Plural x 180,143 ops/sec ±1.38% (92 runs sampled)
 ```
 
 To run benchmarks on your own machine:

@@ -46,6 +46,7 @@ describe( 'Tannin', () => {
 				'nplurals=2;plural=(n != 1)',
 				'plural=(n != 1);',
 				'plural=(n != 1)',
+				( n ) => n === 1 ? 0 : 1,
 			].forEach( ( pf ) => {
 				[ 'plural_forms', 'plural-forms' ].forEach( ( key ) => {
 					i18n = createInstance( {
@@ -56,6 +57,8 @@ describe( 'Tannin', () => {
 						},
 					} );
 
+					expect( i18n.getPluralForm( 'default', 0 ) ).toBe( 1 );
+					expect( i18n.getPluralForm( 'default', 1 ) ).toBe( 0 );
 					expect( i18n.getPluralForm( 'default', 2 ) ).toBe( 1 );
 				} );
 			} );
