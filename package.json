@@ -11,10 +11,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@aduth/eslint-config": "^3.0.0",
+    "@wordpress/eslint-plugin": "^2.0.0",
     "benchmark": "^2.1.4",
-    "eslint": "^5.8.0",
-    "eslint-plugin-jsdoc": "^3.9.1",
+    "eslint": "^5.15.1",
     "jed": "^1.1.1",
     "jest": "^23.6.0",
     "lerna": "^3.10.6",

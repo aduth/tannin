@@ -1,6 +1,6 @@
 {
 	"root": true,
-	"extends": "@aduth/eslint-config",
+	"extends": "plugin:@wordpress/eslint-plugin/recommended",
 	"parserOptions": {
 		"ecmaVersion": 6,
 		"sourceType": "module"
@@ -8,5 +8,8 @@
 	"env": {
 		"es6": true,
 		"node": true
+	},
+	"rules": {
+		"@wordpress/dependency-group": "off"
 	}
 }

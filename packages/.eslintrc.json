@@ -1,11 +1,14 @@
 {
 	"root": true,
-	"extends": "@aduth/eslint-config/es5",
+	"extends": "plugin:@wordpress/eslint-plugin/es5",
 	"parserOptions": {
 		"ecmaVersion": 5,
 		"sourceType": "module"
 	},
 	"env": {
 		"node": true
+	},
+	"rules": {
+		"@wordpress/dependency-group": "off"
 	}
 }

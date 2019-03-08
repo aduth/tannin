@@ -25,6 +25,7 @@ const FIXTURES = [
 describe( 'evaluate', () => {
 	describe( 'fixtures', () => {
 		FIXTURES.forEach( ( { source, postfix } ) => {
+			// eslint-disable-next-line no-eval
 			it( source, () => expect( evaluate( postfix, {} ) ).toEqual( eval( source ) ) );
 		} );
 	} );
