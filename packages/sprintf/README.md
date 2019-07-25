@@ -38,6 +38,23 @@ sprintf( 'Hello %s!', 'world' );
 // ⇒ 'Hello world!'
 ```
 
+## Type coercions and default values
+
+When replacing numeric types (`%d` and `%f`), values will be coerced to numeric values, and default to 0:
+- `sprintf( '%d', 123 )` returns `'123'`
+- `sprintf( '%d', '123' )` returns `'123'`
+- `sprintf( '%d', 'string' )` returns `'0'`
+- `sprintf( '%d', false )` returns `'0'`
+- `sprintf( '%d', null )` returns `'0'`
+- `sprintf( '%d', undefined )` returns `'0'`
+
+When replacing string types (`%s`), values will be coerced to strings, and nullish values will be replaced with `''`:
+- `sprintf( '%s', 'string' )` returns `'string'`
+- `sprintf( '%s', 0 )` returns `'0'`
+- `sprintf( '%s', false )` returns `'false'`
+- `sprintf( '%s', null )` returns `''`
+- `sprintf( '%s', undefined )` returns `''`
+
 ## License
 
 Copyright 2019 Andrew Duthie
