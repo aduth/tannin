@@ -70,7 +70,8 @@ export default function sprintf( string, args ) {
 
 		if ( name !== undefined ) {
 			// If it's a named argument, use name.
-			if ( args[ 0 ] && args[ 0 ].hasOwnProperty( name ) ) {
+			if ( args[ 0 ] && typeof args[ 0 ] === 'object' &&
+					args[ 0 ].hasOwnProperty( name ) ) {
 				value = args[ 0 ][ name ];
 			}
 		} else {

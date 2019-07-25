@@ -31,6 +31,14 @@ describe( 'sprintf', () => {
 		expect( result ).toBe( 'Hello world! From Andrew.' );
 	} );
 
+	it( 'handles named argument edge cases correctly', () => {
+		expect( sprintf( 'My name is %(name)s', 0 ) ).toBe( 'My name is ' );
+		expect( sprintf( 'My name is %(name)s', 1 ) ).toBe( 'My name is ' );
+		expect( sprintf( 'My name is %(valueOf)s', {} ) ).toBe( 'My name is ' );
+		expect( sprintf( 'My name is %(toString)s', {} ) ).toBe( 'My name is ' );
+		expect( sprintf( 'My name is %(length)s', 'a' ) ).toBe( 'My name is ' );
+	} );
+
 	it( 'ignores undefined placeholders', () => {
 		expect( sprintf( '%s & %s', 'Family' ) ).toBe( 'Family & ' );
 		expect( sprintf( '%1$s & %2$s', 'Family' ) ).toBe( 'Family & ' );
