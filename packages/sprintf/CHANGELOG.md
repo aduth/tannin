@@ -1,3 +1,9 @@
+## 1.0.3 (2019-07-25)
+
+Bugfix
+
+- Fix handling of falsy values, notably 0
+
 ## 1.0.2 (2019-03-07)
 
 Internal

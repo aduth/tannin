@@ -47,4 +47,15 @@ describe( 'sprintf', () => {
 		expect( sprintf( '%s%%s', 'a', 'b' ) ).toBe( 'a%s' );
 		expect( sprintf( '%s%%%s', 'a', 'b' ) ).toBe( 'a%b' );
 	} );
+
+	it( 'handles falsy values correctly', () => {
+		expect( sprintf( 'Value: %s', 0 ) ).toBe( 'Value: 0' );
+		expect( sprintf( 'Value: %d', 0 ) ).toBe( 'Value: 0' );
+		expect( sprintf( 'Value: %s', false ) ).toBe( 'Value: false' );
+		expect( sprintf( 'Value: %d', false ) ).toBe( 'Value: 0' );
+		expect( sprintf( 'Value: %s', null ) ).toBe( 'Value: ' );
+		expect( sprintf( 'Value: %d', null ) ).toBe( 'Value: 0' );
+		expect( sprintf( 'Value: %s', undefined ) ).toBe( 'Value: ' );
+		expect( sprintf( 'Value: %d', undefined ) ).toBe( 'Value: 0' );
+	} );
 } );
