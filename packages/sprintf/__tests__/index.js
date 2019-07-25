@@ -25,14 +25,22 @@ describe( 'sprintf', () => {
 		expect( result ).toBe( 'Hello world! From Andrew.' );
 	} );
 
+	it( 'supports named arguments', () => {
+		const result = sprintf( 'Hello %(place)s! From %(name)s.', { place: 'world', name: 'Andrew' } );
+
+		expect( result ).toBe( 'Hello world! From Andrew.' );
+	} );
+
 	it( 'ignores undefined placeholders', () => {
 		expect( sprintf( '%s & %s', 'Family' ) ).toBe( 'Family & ' );
 		expect( sprintf( '%1$s & %2$s', 'Family' ) ).toBe( 'Family & ' );
+		expect( sprintf( '%(group1)s & %(group2)s', { group1: 'Family' } ) ).toBe( 'Family & ' );
 	} );
 
 	it( 'ignores additional arguments', () => {
 		expect( sprintf( '%s', 'Family', 'Friends' ) ).toBe( 'Family' );
 		expect( sprintf( '%1$s', 'Family', 'Friends' ) ).toBe( 'Family' );
+		expect( sprintf( '%(a)s', { a: 'Family', b: 'Friends' } ) ).toBe( 'Family' );
 	} );
 
 	it( 'handles precision', () => {

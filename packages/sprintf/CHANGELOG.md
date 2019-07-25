@@ -1,3 +1,9 @@
+## 1.1.0 (2019-07-25)
+
+New Features
+
+- Add support for named arguments
+
 ## 1.0.3 (TBD)
 
 Bugfix

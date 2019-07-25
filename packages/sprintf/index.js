@@ -5,13 +5,13 @@
  *
  * @type {RegExp}
  */
-var PATTERN = /%((\d+)\$)?[ +0#-]*\d*(\.(\d+|\*))?(ll|[lhqL])?([cduxXefgsp%])/g;
-//              ▲         ▲       ▲  ▲            ▲           ▲ type
-//              │         │       │  │            └ Length (unsupported)
-//              │         │       │  └ Precision / max width
-//              │         │       └ Min width (unsupported)
-//              │         └ Flags (unsupported)
-//              └ Index
+var PATTERN = /%(((\d+)\$)|(\(([A-Za-z]\w*)\)))?[ +0#-]*\d*(\.(\d+|\*))?(ll|[lhqL])?([cduxXefgsp%])/g;
+//               ▲         ▲                    ▲       ▲  ▲            ▲           ▲ type
+//               │         │                    │       │  │            └ Length (unsupported)
+//               │         │                    │       │  └ Precision / max width
+//               │         │                    │       └ Min width (unsupported)
+//               │         │                    └ Flags (unsupported)
+//               └ Index   └ Name (for named arguments)
 
 /**
  * Given a format string, returns string with arguments interpolatation.
@@ -49,11 +49,12 @@ export default function sprintf( string, args ) {
 	i = 1;
 
 	return string.replace( PATTERN, function() {
-		var index, precision, type, value;
+		var index, name, precision, type, value;
 
-		index = arguments[ 2 ];
-		precision = arguments[ 4 ];
-		type = arguments[ 6 ];
+		index = arguments[ 3 ];
+		name = arguments[ 5 ];
+		precision = arguments[ 7 ];
+		type = arguments[ 9 ];
 
 		// There's no placeholder substitution in the explicit "%", meaning it
 		// is not necessary to increment argument index.
@@ -67,14 +68,20 @@ export default function sprintf( string, args ) {
 			i++;
 		}
 
-		// If not a positional argument, use counter value.
-		if ( index === undefined ) {
-			index = i;
+		if ( name !== undefined ) {
+			// If it's a named argument, use name.
+			value = args[ 0 ] && args[ 0 ][ name ];
+		} else {
+			// If not a positional argument, use counter value.
+			if ( index === undefined ) {
+				index = i;
+			}
+
+			i++;
+
+			// Positional argument.
+			value = args[ index - 1 ];
 		}
-
-		i++;
-
-		value = args[ index - 1 ];
 
 		// Parse as type.
 		if ( type === 'f' ) {

@@ -1,6 +1,6 @@
 {
   "name": "@tannin/sprintf",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "printf string formatter",
   "main": "build/index.js",
   "module": "index.js",

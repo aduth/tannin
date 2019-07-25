@@ -8,6 +8,7 @@ See: [https://en.wikipedia.org/wiki/Printf_format_string](https://en.wikipedia.o
 In addition to basic placeholder substitution, the following options a placeholder are implemented:
 
 - Positional index
+- Named arguments
 - Precision / maximum width (including `*` precision)
 - Type (only the behaviors of `f`, `d`, `s`, and `%` are applied)
 
