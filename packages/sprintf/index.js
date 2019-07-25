@@ -70,7 +70,9 @@ export default function sprintf( string, args ) {
 
 		if ( name !== undefined ) {
 			// If it's a named argument, use name.
-			value = args[ 0 ] && args[ 0 ][ name ];
+			if ( args[ 0 ] && args[ 0 ].hasOwnProperty( name ) ) {
+				value = args[ 0 ][ name ];
+			}
 		} else {
 			// If not a positional argument, use counter value.
 			if ( index === undefined ) {
