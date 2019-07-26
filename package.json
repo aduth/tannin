@@ -11,15 +11,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@wordpress/eslint-plugin": "^2.0.0",
+    "@wordpress/eslint-plugin": "^2.3.0",
     "benchmark": "^2.1.4",
-    "eslint": "^5.15.1",
+    "eslint": "^6.1.0",
     "jed": "^1.1.1",
-    "jest": "^24.3.1",
-    "lerna": "^3.13.1",
-    "lodash-es": "^4.17.11",
-    "rollup": "^1.5.0",
-    "rollup-plugin-node-resolve": "^4.0.1",
+    "jest": "^24.8.0",
+    "lerna": "^3.16.4",
+    "lodash-es": "^4.17.15",
+    "rollup": "^1.17.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-uglify": "^6.0.2"
   },
   "dependencies": {
