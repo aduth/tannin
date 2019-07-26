@@ -7,8 +7,7 @@
     "pretest": "npm run build",
     "test": "npm run test:unit && npm run test:lint",
     "build": "rollup -c",
-    "install:packages": "find packages -maxdepth 1 -type d \\( ! -name packages \\) -exec sh -c '(cd {} && npm install --no-package-lock)' ';'",
-    "preinstall": "npm run install:packages"
+    "postinstall": "lerna bootstrap"
   },
   "license": "MIT",
   "devDependencies": {
