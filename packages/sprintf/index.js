@@ -1,11 +1,35 @@
 /**
  * Regular expression matching format placeholder syntax.
  *
+ * The pattern for matching named arguments is a naive and incomplete matcher
+ * against valid JavaScript identifier names.
+ *
+ * via Mathias Bynens:
+ *
+ * >An identifier must start with $, _, or any character in the Unicode
+ * >categories “Uppercase letter (Lu)”, “Lowercase letter (Ll)”, “Titlecase
+ * >letter (Lt)”, “Modifier letter (Lm)”, “Other letter (Lo)”, or “Letter
+ * >number (Nl)”.
+ * >
+ * >The rest of the string can contain the same characters, plus any U+200C zero
+ * >width non-joiner characters, U+200D zero width joiner characters, and
+ * >characters in the Unicode categories “Non-spacing mark (Mn)”, “Spacing
+ * >combining mark (Mc)”, “Decimal digit number (Nd)”, or “Connector
+ * >punctuation (Pc)”.
+ *
+ * If browser support is constrained to those supporting ES2015, this could be
+ * made more accurate using the `u` flag:
+ *
+ * ```
+ * /^[$_\p{L}\p{Nl}][$_\p{L}\p{Nl}\u200C\u200D\p{Mn}\p{Mc}\p{Nd}\p{Pc}]*$/u;
+ * ```
+ *
  * @see http://www.pixelbeat.org/programming/gcc/format_specs.html
+ * @see https://mathiasbynens.be/notes/javascript-identifiers#valid-identifier-names
  *
  * @type {RegExp}
  */
-var PATTERN = /%(((\d+)\$)|(\(([A-Za-z]\w*)\)))?[ +0#-]*\d*(\.(\d+|\*))?(ll|[lhqL])?([cduxXefgsp%])/g;
+var PATTERN = /%(((\d+)\$)|(\(([$_a-zA-Z][$_a-zA-Z0-9]*)\)))?[ +0#-]*\d*(\.(\d+|\*))?(ll|[lhqL])?([cduxXefgsp%])/g;
 //               ▲         ▲                    ▲       ▲  ▲            ▲           ▲ type
 //               │         │                    │       │  │            └ Length (unsupported)
 //               │         │                    │       │  └ Precision / max width
