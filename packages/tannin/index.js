@@ -8,7 +8,7 @@ import pluralForms from '@tannin/plural-forms';
  *
  * @type {Object}
  *
- * @typedef {TanninOptions}
+ * @typedef {Object} TanninOptions
  */
 
 /**
