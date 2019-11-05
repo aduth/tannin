@@ -102,18 +102,28 @@ i18n.translate( 'example' ).fetch();
 
 ## Benchmarks
 
-The following benchmarks are performed in Node 10.12.0 on a MacBook Pro (Late 2016), 2.9 GHz Intel Core i7.
+The following benchmarks are performed in Node 10.16.0 on a MacBook Pro (2019), 2.4 GHz 8-Core Intel Core i9, 32 GB 2400 MHz DDR4 RAM.
 
 ```
-Tannin - Singular x 141,717,969 ops/sec ±1.52% (84 runs sampled)
-Tannin - Singular (Untranslated) x 53,357,319 ops/sec ±1.23% (92 runs sampled)
-Tannin - Plural x 4,376,066 ops/sec ±1.19% (89 runs sampled)
-Tannin (Optimized Default) - Singular x 53,981,311 ops/sec ±1.79% (87 runs sampled)
-Tannin (Optimized Default) - Singular (Untranslated) x 52,088,249 ops/sec ±0.79% (89 runs sampled)
-Tannin (Optimized Default) - Plural x 33,424,574 ops/sec ±0.98% (89 runs sampled)
-Jed - Singular x 39,358,277 ops/sec ±1.11% (92 runs sampled)
-Jed - Singular (Untranslated) x 180,212 ops/sec ±1.47% (90 runs sampled)
-Jed - Plural x 180,143 ops/sec ±1.38% (92 runs sampled)
+Singular
+---
+Tannin x 216,670,213 ops/sec ±0.73% (90 runs sampled)
+Tannin (Optimized Default) x 219,477,869 ops/sec ±0.32% (96 runs sampled)
+Jed x 58,730,499 ops/sec ±0.34% (96 runs sampled)
+
+
+Singular (Untranslated)
+---
+Tannin x 75,835,743 ops/sec ±1.26% (96 runs sampled)
+Tannin (Optimized Default) x 76,474,169 ops/sec ±0.61% (92 runs sampled)
+Jed x 241,632 ops/sec ±0.73% (96 runs sampled)
+
+
+Plural
+---
+Tannin x 7,108,006 ops/sec ±0.96% (95 runs sampled)
+Tannin (Optimized Default) x 51,658,190 ops/sec ±1.25% (94 runs sampled)
+Jed x 236,797 ops/sec ±0.98% (97 runs sampled)
 ```
 
 To run benchmarks on your own machine:
