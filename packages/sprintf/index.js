@@ -54,7 +54,7 @@ var PATTERN = /%(((\d+)\$)|(\(([$_a-zA-Z][$_a-zA-Z0-9]*)\)))?[ +0#-]*\d*(\.(\d+|
  * ```
  *
  * @param {string} string printf format string
- * @param {?Array} args   String arguments.
+ * @param {Array}  [args] String arguments.
  *
  * @return {string} Formatted string.
  */

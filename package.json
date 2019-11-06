@@ -4,6 +4,7 @@
   "scripts": {
     "test:unit": "jest",
     "test:lint": "eslint .",
+    "test:types": "tsc",
     "pretest": "npm run build",
     "test": "npm run test:unit && npm run test:lint",
     "build": "rollup -c",
@@ -20,7 +21,8 @@
     "lodash": "^4.17.15",
     "rollup": "^1.26.3",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-uglify": "^6.0.3"
+    "rollup-plugin-uglify": "^6.0.3",
+    "typescript": "^3.7.2"
   },
   "dependencies": {
     "@tannin/compat": "file:packages/compat",
