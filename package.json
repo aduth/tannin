@@ -6,7 +6,7 @@
     "test:lint": "eslint .",
     "test:types": "tsc",
     "pretest": "npm run build",
-    "test": "npm run test:unit && npm run test:lint",
+    "test": "npm run test:unit && npm run test:lint && npm run test:types",
     "build": "rollup -c",
     "postinstall": "lerna bootstrap"
   },
