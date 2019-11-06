@@ -14,8 +14,8 @@ import pluralForms from '@tannin/plural-forms';
  *
  * @typedef {Object} TanninDomainMetadata
  *
- * @property {string}            domain         Domain name.
- * @property {string}            lang           Language code.
+ * @property {string}            [domain]       Domain name.
+ * @property {string}            [lang]         Language code.
  * @property {(string|Function)} [plural_forms] Plural forms expression or
  *                                              function evaluator.
  */
