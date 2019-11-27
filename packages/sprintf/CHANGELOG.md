@@ -4,8 +4,6 @@ New Features
 
 - Add support for named arguments
 
-## 1.0.3 (TBD)
-
 Bugfix
 
 - Fix handling of falsy values, notably 0
