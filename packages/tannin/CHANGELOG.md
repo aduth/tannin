@@ -1,3 +1,9 @@
+## 1.1.1 (TBD)
+
+Internal
+
+- Update project inter-dependencies
+
 ## 1.1.0 (2019-03-07)
 
 New Features
