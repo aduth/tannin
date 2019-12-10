@@ -13,6 +13,7 @@
 	"exclude": [
 		"**/build",
 		"**/dist",
-		"**/__tests__"
+		"**/__tests__",
+		"node_modules"
 	]
 }
