@@ -24,13 +24,7 @@ import pluralForms from '@tannin/plural-forms';
  * Domain translation pair respectively representing the singular and plural
  * translation.
  *
- * @typedef {Array<string,string>} TanninTranslation
- */
-
-/**
- * Locale domain entry.
- *
- * @typedef {(TanninDomainMetadata|TanninTranslation)} LocaleDomainEntry
+ * @typedef {[string,string]} TanninTranslation
  */
 
 /**
@@ -38,7 +32,7 @@ import pluralForms from '@tannin/plural-forms';
  * array of two string entries respectively representing the singular and plural
  * translation.
  *
- * @typedef {Object<string,LocaleDomainEntry>} TanninLocaleDomain
+ * @typedef {{[key:string]:TanninDomainMetadata|TanninTranslation,'':TanninDomainMetadata|TanninTranslation}} TanninLocaleDomain
  */
 
 /**
@@ -46,7 +40,7 @@ import pluralForms from '@tannin/plural-forms';
  *
  * @see http://messageformat.github.io/Jed/
  *
- * @typedef {Object<string,TanninLocaleDomain>} TanninLocaleData
+ * @typedef {{[domain:string]:TanninLocaleDomain}} TanninLocaleData
  */
 
 /**
