@@ -14,10 +14,6 @@ var DEFAULT_OPTIONS = {
 	domain: 'messages',
 };
 
-function identity( x ) {
-	return x;
-}
-
 function Chain( key, instance ) {
 	this._key = key;
 	this._instance = instance;
@@ -43,18 +39,19 @@ Chain.prototype.ifPlural = function( num, pkey ) {
 };
 
 Chain.prototype.fetch = function( sArr ) {
-	var fn;
+	var result;
 
 	if ( ! Array.isArray( sArr ) ) {
 		sArr = Array.prototype.slice.call( arguments, 0 );
 	}
 
-	fn = sArr.length ? Jed.sprintf : identity;
+	result = this._instance.dcnpgettext( this._domain, this._context, this._key, this._pkey, this._val );
 
-	return fn(
-		this._instance.dcnpgettext( this._domain, this._context, this._key, this._pkey, this._val ),
-		sArr
-	);
+	if ( sArr.length ) {
+		return Jed.sprintf( result, sArr );
+	}
+
+	return result;
 };
 
 /**
