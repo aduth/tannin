@@ -4,6 +4,7 @@
   "description": "Compiles an evaluating function for a C expression",
   "main": "build/index.js",
   "module": "index.js",
+  "types": "index.d.ts",
   "keywords": [],
   "author": {
     "name": "Andrew Duthie",
@@ -22,6 +23,7 @@
   "license": "MIT",
   "files": [
     "index.js",
+    "index.d.ts",
     "build",
     "dist"
   ],

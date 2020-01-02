@@ -4,6 +4,7 @@
   "description": "gettext localization library compatible with Jed-formatted locale data",
   "main": "build/index.js",
   "module": "index.js",
+  "types": "index.d.ts",
   "moduleName": "Tannin",
   "scripts": {
     "prepublishOnly": "cp ../../README.md README.md"
@@ -34,6 +35,7 @@
   "license": "MIT",
   "files": [
     "index.js",
+    "index.d.ts",
     "build",
     "dist"
   ],

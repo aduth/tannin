@@ -32,11 +32,22 @@ Otherwise, download a pre-built copy from unpkg:
 
 ## Usage
 
+Using positional arguments:
+
 ```js
 import sprintf from '@tannin/sprintf';
 
 sprintf( 'Hello %s!', 'world' );
 // ⇒ 'Hello world!'
+```
+
+Using named arguments:
+
+```js
+import sprintf from '@tannin/sprintf';
+
+sprintf( 'Hello %(place)s! From %(name)s.', { place: 'world', name: 'Andrew' } )
+// ⇒ 'Hello world! From Andrew.'
 ```
 
 ## Type coercions and default values

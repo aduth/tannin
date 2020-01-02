@@ -4,6 +4,7 @@
   "description": "Jed drop-in replacement shim for Tannin",
   "main": "build/index.js",
   "module": "index.js",
+  "types": "index.d.ts",
   "moduleName": "Jed",
   "keywords": [
     "jed",
@@ -31,6 +32,7 @@
   "license": "MIT",
   "files": [
     "index.js",
+    "index.d.ts",
     "build",
     "dist"
   ],

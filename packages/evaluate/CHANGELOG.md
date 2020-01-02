@@ -1,3 +1,9 @@
+## 1.2.0 (Unreleased)
+
+New Features
+
+- Add TypeScript definitions
+
 ## 1.1.2 (2019-11-27)
 
 Internal
