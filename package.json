@@ -12,17 +12,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@wordpress/eslint-plugin": "^3.1.0",
+    "@wordpress/eslint-plugin": "^3.3.0",
     "benchmark": "^2.1.4",
-    "eslint": "^6.6.0",
+    "eslint": "^6.8.0",
     "jed": "^1.1.1",
     "jest": "^24.9.0",
-    "lerna": "^3.18.3",
+    "lerna": "^3.20.2",
     "lodash": "^4.17.15",
-    "rollup": "^1.26.3",
+    "rollup": "^1.27.14",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-uglify": "^6.0.3",
-    "typescript": "^3.7.3"
+    "rollup-plugin-uglify": "^6.0.4",
+    "typescript": "^3.7.4"
   },
   "dependencies": {
     "@tannin/compat": "file:packages/compat",
