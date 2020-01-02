@@ -39,7 +39,7 @@ const FIXTURES = [
 ];
 
 describe( 'postfix', () => {
-	describe.only( 'fixtures', () => {
+	describe( 'fixtures', () => {
 		FIXTURES.forEach( ( { input, output } ) => {
 			it( input, () => expect( postfix( input ) ).toEqual( output ) );
 		} );
