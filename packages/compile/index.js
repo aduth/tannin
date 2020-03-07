@@ -18,7 +18,7 @@ import evaluate from '@tannin/evaluate';
  *
  * @param {string} expression C expression.
  *
- * @return {Function} Compiled evaluator.
+ * @return {(variables?:{[variable:string]:*})=>*} Compiled evaluator.
  */
 export default function compile( expression ) {
 	var terms = postfix( expression );
