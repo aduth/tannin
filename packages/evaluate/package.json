@@ -1,6 +1,6 @@
 {
   "name": "@tannin/evaluate",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Evaluates the result of an expression given as postfix terms",
   "main": "build/index.js",
   "module": "index.js",
