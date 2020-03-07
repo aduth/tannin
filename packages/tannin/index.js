@@ -116,9 +116,9 @@ export default function Tannin( data, options ) {
 	this.options = {};
 
 	for ( key in DEFAULT_OPTIONS ) {
-		this.options[ key ] = options !== undefined && key in options ?
-			options[ key ] :
-			DEFAULT_OPTIONS[ key ];
+		this.options[ key ] = options !== undefined && key in options
+			? options[ key ]
+			: DEFAULT_OPTIONS[ key ];
 	}
 }
 
