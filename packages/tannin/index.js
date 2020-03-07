@@ -168,13 +168,12 @@ Tannin.prototype.getPluralForm = function( domain, n ) {
 /**
  * Translate a string.
  *
- * @param {string}           domain   Translation domain.
- * @param {string|undefined} context  Context distinguishing terms of the same
- *                                    name.
- * @param {string}           singular Primary key for translation lookup.
- * @param {string}           [plural] Fallback value used for non-zero plural
- *                                    form index.
- * @param {number}           [n]      Value to use in calculating plural form.
+ * @param {string}      domain   Translation domain.
+ * @param {string|void} context  Context distinguishing terms of the same name.
+ * @param {string}      singular Primary key for translation lookup.
+ * @param {string=}     plural   Fallback value used for non-zero plural
+ *                               form index.
+ * @param {number=}     n        Value to use in calculating plural form.
  *
  * @return {string} Translated string.
  */
