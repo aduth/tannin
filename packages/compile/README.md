@@ -28,6 +28,6 @@ evaluate( { n: 2 } );
 
 ## License
 
-Copyright 2019 Andrew Duthie
+Copyright 2019-2020 Andrew Duthie
 
 Released under the [MIT License](https://opensource.org/licenses/MIT).

@@ -69,6 +69,6 @@ When replacing string types (`%s`), values will be coerced to strings, and nulli
 
 ## License
 
-Copyright 2019 Andrew Duthie
+Copyright 2019-2020 Andrew Duthie
 
 Released under the [MIT License](https://opensource.org/licenses/MIT).
