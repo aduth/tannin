@@ -1,0 +1,11 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"rootDir": ".",
+		"noImplicitAny": false,
+		"strictNullChecks": false,
+		"noImplicitReturns": false
+	},
+	"files": ["index.js"],
+	"references": [{ "path": "../plural-forms" }]
+}

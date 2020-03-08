@@ -2,24 +2,31 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"checkJs": true,
-		"noEmit": true,
-		"module": "es2015",
+		"emitDeclarationOnly": true,
+		"declaration": true,
+		"module": "esnext",
 		"moduleResolution": "node",
-		"target": "es5",
-		"baseUrl": "packages",
-		"paths": {
-			"@tannin/*": [ "*/index.js" ],
-			"tannin": [ "tannin/index.js" ]
-		}
+		"target": "esnext",
+		"composite": true,
+
+		"strict": true,
+		"strictNullChecks": true,
+		"noImplicitAny": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+
+		/* This needs to be false so our types are possible to consume without setting this */
+		"esModuleInterop": false,
+		"isolatedModules": true
 	},
-	"include": [
-		"packages"
-	],
+	"include": [],
 	"exclude": [
 		"**/build",
 		"**/dist",
 		"**/__tests__",
 		"**/benchmark",
-		"node_modules"
+		"**/node_modules"
 	]
 }

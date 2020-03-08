@@ -1,0 +1,8 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"rootDir": "."
+	},
+	"files": ["index.js"],
+	"references": [{ "path": "../evaluate" }, { "path": "../postfix" }]
+}
