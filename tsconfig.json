@@ -21,7 +21,7 @@
 		"esModuleInterop": false,
 		"isolatedModules": true
 	},
-	"include": [],
+	"files": [],
 	"exclude": [
 		"**/build",
 		"**/dist",
