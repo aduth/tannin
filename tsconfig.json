@@ -6,7 +6,7 @@
 		"declaration": true,
 		"module": "esnext",
 		"moduleResolution": "node",
-		"target": "esnext",
+		"target": "es5",
 		"composite": true,
 
 		"strict": true,
