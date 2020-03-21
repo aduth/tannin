@@ -5,6 +5,6 @@
 		"noImplicitAny": false,
 		"strictNullChecks": false
 	},
-	"files": ["index.js"],
-	"references": [{ "path": "../compile" }]
+	"files": [ "index.js" ],
+	"references": [ { "path": "../compile" } ]
 }
