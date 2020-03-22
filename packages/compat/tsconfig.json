@@ -6,5 +6,5 @@
 		"noImplicitThis": false
 	},
 	"files": [ "index.js" ],
-	"references": [ { "path": "../compile" } ]
+	"references": [ { "path": "../sprintf" }, { "path": "../tannin" } ]
 }
