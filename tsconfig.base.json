@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"emitDeclarationOnly": true,
+		"declaration": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"target": "es5",
+		"composite": true,
+
+		"strict": true,
+		"strictNullChecks": true,
+		"noImplicitAny": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+
+		/* This needs to be false so our types are possible to consume without setting this */
+		"esModuleInterop": false,
+		"isolatedModules": true
+	},
+	"exclude": [
+		"**/build",
+		"**/dist",
+		"**/__tests__",
+		"**/benchmark",
+		"**/node_modules"
+	]
+}
