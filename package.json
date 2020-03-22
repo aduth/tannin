@@ -8,7 +8,7 @@
     "pretest": "npm run build:bundle",
     "test": "npm run test:unit && npm run test:lint && npm run test:types",
     "build:bundle": "rollup -c",
-    "prebuild:types": "rimraf \"packages/**/*.+(d.ts|.tsbuildinfo)\"",
+    "prebuild:types": "rimraf \"packages/**/*.+(d.ts|tsbuildinfo)\"",
     "build:types": "tsc --build packages/*",
     "build": "npm run build:bundle && npm run build:types",
     "postinstall": "lerna bootstrap"
