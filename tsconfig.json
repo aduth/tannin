@@ -1,25 +1,12 @@
 {
-	"compilerOptions": {
-		"allowJs": true,
-		"checkJs": true,
-		"noEmit": true,
-		"module": "es2015",
-		"moduleResolution": "node",
-		"target": "es5",
-		"baseUrl": "packages",
-		"paths": {
-			"@tannin/*": [ "*/index.js" ],
-			"tannin": [ "tannin/index.js" ]
-		}
-	},
-	"include": [
-		"packages"
-	],
-	"exclude": [
-		"**/build",
-		"**/dist",
-		"**/__tests__",
-		"**/benchmark",
-		"node_modules"
+	"files": [],
+	"references": [
+		{ "path": "packages/compat" },
+		{ "path": "packages/compile" },
+		{ "path": "packages/evaluate" },
+		{ "path": "packages/plural-forms" },
+		{ "path": "packages/postfix" },
+		{ "path": "packages/sprintf" },
+		{ "path": "packages/tannin" }
 	]
 }

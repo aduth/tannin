@@ -4,12 +4,12 @@
   "scripts": {
     "test:unit": "jest",
     "test:lint": "eslint .",
-    "test:types": "tsc",
+    "test:types": "npm run build:types",
     "pretest": "npm run build:bundle",
     "test": "npm run test:unit && npm run test:lint && npm run test:types",
     "build:bundle": "rollup -c",
-    "prebuild:types": "rimraf \"packages/**/*.d.ts\"",
-    "build:types": "tsc -p tsconfig.declarations.json",
+    "prebuild:types": "tsc --build --clean",
+    "build:types": "tsc --build --verbose",
     "build": "npm run build:bundle && npm run build:types",
     "postinstall": "lerna bootstrap"
   },

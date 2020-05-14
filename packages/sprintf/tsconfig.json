@@ -1,0 +1,9 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": ".",
+		"noImplicitAny": false,
+		"strictNullChecks": false
+	},
+	"files": [ "index.js" ]
+}
