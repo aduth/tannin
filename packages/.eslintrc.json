@@ -9,6 +9,6 @@
 		"node": true
 	},
 	"rules": {
-		"@wordpress/dependency-group": "off"
+		"jsdoc/valid-types": "off"
 	}
 }

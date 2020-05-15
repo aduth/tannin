@@ -2,7 +2,7 @@ const Tannin = require( '..' );
 const pluralForms = require( '@tannin/plural-forms' );
 
 jest.mock( '@tannin/plural-forms', () => {
-	const actual = require.requireActual( '@tannin/plural-forms' );
+	const actual = jest.requireActual( '@tannin/plural-forms' );
 	return jest.fn().mockImplementation( actual );
 } );
 
