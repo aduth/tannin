@@ -21,6 +21,7 @@ export default packages.reduce((result, pkg) => {
 			output: {
 				format: 'cjs',
 				file: join(pkgRoot, '/build/' + basename(module)),
+				exports: 'default',
 			},
 			external: Object.keys(dependencies),
 		},
@@ -32,6 +33,7 @@ export default packages.reduce((result, pkg) => {
 				format: 'iife',
 				name: moduleName,
 				file: join(pkgRoot, '/dist/' + pkg + '.js'),
+				exports: 'default',
 			},
 			plugins: [resolve()],
 		},
@@ -43,6 +45,7 @@ export default packages.reduce((result, pkg) => {
 				format: 'iife',
 				name: moduleName,
 				file: join(pkgRoot, '/dist/' + pkg + '.min.js'),
+				exports: 'default',
 			},
 			plugins: [resolve(), uglify()],
 		},
