@@ -5,6 +5,7 @@
   "main": "build/index.js",
   "module": "index.js",
   "types": "index.d.ts",
+  "moduleName": "pluralForms",
   "keywords": [],
   "author": {
     "name": "Andrew Duthie",

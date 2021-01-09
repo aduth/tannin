@@ -1,6 +1,5 @@
 import { join, basename } from 'path';
 import { readdirSync, statSync } from 'fs';
-import { camelCase } from 'lodash';
 import { uglify } from 'rollup-plugin-uglify';
 import resolve from 'rollup-plugin-node-resolve';
 
@@ -16,7 +15,7 @@ export default packages.reduce( ( result, pkg ) => {
 	const {
 		module,
 		dependencies = {},
-		moduleName = camelCase( pkg ),
+		moduleName = pkg,
 	} = manifest;
 
 	return result.concat( [
