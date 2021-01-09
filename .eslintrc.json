@@ -1,12 +1,18 @@
 {
 	"root": true,
-	"extends": "plugin:@wordpress/eslint-plugin/recommended-with-formatting",
+	"extends": ["eslint:recommended", "plugin:prettier/recommended"],
+	"plugins": ["prettier"],
 	"parserOptions": {
 		"ecmaVersion": 2015,
 		"sourceType": "module"
 	},
 	"env": {
 		"es6": true,
-		"node": true
+		"node": true,
+		"jest": true
+	},
+	"rules": {
+		"prettier/prettier": "error",
+		"no-prototype-builtins": "off"
 	}
 }

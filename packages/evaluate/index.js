@@ -4,50 +4,50 @@
  * @type {Object}
  */
 var OPERATORS = {
-	'!': function( a ) {
-		return ! a;
+	'!': function (a) {
+		return !a;
 	},
-	'*': function( a, b ) {
+	'*': function (a, b) {
 		return a * b;
 	},
-	'/': function( a, b ) {
+	'/': function (a, b) {
 		return a / b;
 	},
-	'%': function( a, b ) {
+	'%': function (a, b) {
 		return a % b;
 	},
-	'+': function( a, b ) {
+	'+': function (a, b) {
 		return a + b;
 	},
-	'-': function( a, b ) {
+	'-': function (a, b) {
 		return a - b;
 	},
-	'<': function( a, b ) {
+	'<': function (a, b) {
 		return a < b;
 	},
-	'<=': function( a, b ) {
+	'<=': function (a, b) {
 		return a <= b;
 	},
-	'>': function( a, b ) {
+	'>': function (a, b) {
 		return a > b;
 	},
-	'>=': function( a, b ) {
+	'>=': function (a, b) {
 		return a >= b;
 	},
-	'==': function( a, b ) {
+	'==': function (a, b) {
 		return a === b;
 	},
-	'!=': function( a, b ) {
+	'!=': function (a, b) {
 		return a !== b;
 	},
-	'&&': function( a, b ) {
+	'&&': function (a, b) {
 		return a && b;
 	},
-	'||': function( a, b ) {
+	'||': function (a, b) {
 		return a || b;
 	},
-	'?:': function( a, b, c ) {
-		if ( a ) {
+	'?:': function (a, b, c) {
+		if (a) {
 			throw b;
 		}
 
@@ -76,35 +76,40 @@ var OPERATORS = {
  *
  * @return {*} Result of evaluation.
  */
-export default function evaluate( postfix, variables ) {
+export default function evaluate(postfix, variables) {
 	var stack = [],
-		i, j, args, getOperatorResult, term, value;
+		i,
+		j,
+		args,
+		getOperatorResult,
+		term,
+		value;
 
-	for ( i = 0; i < postfix.length; i++ ) {
-		term = postfix[ i ];
+	for (i = 0; i < postfix.length; i++) {
+		term = postfix[i];
 
-		getOperatorResult = OPERATORS[ term ];
-		if ( getOperatorResult ) {
+		getOperatorResult = OPERATORS[term];
+		if (getOperatorResult) {
 			// Pop from stack by number of function arguments.
 			j = getOperatorResult.length;
-			args = Array( j );
-			while ( j-- ) {
-				args[ j ] = stack.pop();
+			args = Array(j);
+			while (j--) {
+				args[j] = stack.pop();
 			}
 
 			try {
-				value = getOperatorResult.apply( null, args );
-			} catch ( earlyReturn ) {
+				value = getOperatorResult.apply(null, args);
+			} catch (earlyReturn) {
 				return earlyReturn;
 			}
-		} else if ( variables.hasOwnProperty( term ) ) {
-			value = variables[ term ];
+		} else if (variables.hasOwnProperty(term)) {
+			value = variables[term];
 		} else {
 			value = +term;
 		}
 
-		stack.push( value );
+		stack.push(value);
 	}
 
-	return stack[ 0 ];
+	return stack[0];
 }

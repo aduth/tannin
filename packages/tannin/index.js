@@ -67,15 +67,15 @@ var DEFAULT_OPTIONS = {
  *
  * @return {string} Plural forms expression.
  */
-function getPluralExpression( pf ) {
+function getPluralExpression(pf) {
 	var parts, i, part;
 
-	parts = pf.split( ';' );
+	parts = pf.split(';');
 
-	for ( i = 0; i < parts.length; i++ ) {
-		part = parts[ i ].trim();
-		if ( part.indexOf( 'plural=' ) === 0 ) {
-			return part.substr( 7 );
+	for (i = 0; i < parts.length; i++) {
+		part = parts[i].trim();
+		if (part.indexOf('plural=') === 0) {
+			return part.substr(7);
 		}
 	}
 }
@@ -88,7 +88,7 @@ function getPluralExpression( pf ) {
  * @param {TanninLocaleData} data      Jed-formatted locale data.
  * @param {TanninOptions}    [options] Tannin options.
  */
-export default function Tannin( data, options ) {
+export default function Tannin(data, options) {
 	var key;
 
 	/**
@@ -115,10 +115,11 @@ export default function Tannin( data, options ) {
 	 */
 	this.options = {};
 
-	for ( key in DEFAULT_OPTIONS ) {
-		this.options[ key ] = options !== undefined && key in options
-			? options[ key ]
-			: DEFAULT_OPTIONS[ key ];
+	for (key in DEFAULT_OPTIONS) {
+		this.options[key] =
+			options !== undefined && key in options
+				? options[key]
+				: DEFAULT_OPTIONS[key];
 	}
 }
 
@@ -130,39 +131,40 @@ export default function Tannin( data, options ) {
  *
  * @return {number} Plural form index.
  */
-Tannin.prototype.getPluralForm = function( domain, n ) {
-	var getPluralForm = this.pluralForms[ domain ],
-		config, plural, pf;
+Tannin.prototype.getPluralForm = function (domain, n) {
+	var getPluralForm = this.pluralForms[domain],
+		config,
+		plural,
+		pf;
 
-	if ( ! getPluralForm ) {
-		config = this.data[ domain ][ '' ];
+	if (!getPluralForm) {
+		config = this.data[domain][''];
 
-		pf = (
-			config[ 'Plural-Forms' ] ||
-			config[ 'plural-forms' ] ||
+		pf =
+			config['Plural-Forms'] ||
+			config['plural-forms'] ||
 			// Ignore reason: As known, there's no way to document the empty
 			// string property on a key to guarantee this as metadata.
 			// @ts-ignore
-			config.plural_forms
-		);
+			config.plural_forms;
 
-		if ( typeof pf !== 'function' ) {
+		if (typeof pf !== 'function') {
 			plural = getPluralExpression(
-				config[ 'Plural-Forms' ] ||
-				config[ 'plural-forms' ] ||
-				// Ignore reason: As known, there's no way to document the empty
-				// string property on a key to guarantee this as metadata.
-				// @ts-ignore
-				config.plural_forms
+				config['Plural-Forms'] ||
+					config['plural-forms'] ||
+					// Ignore reason: As known, there's no way to document the empty
+					// string property on a key to guarantee this as metadata.
+					// @ts-ignore
+					config.plural_forms
 			);
 
-			pf = pluralForms( plural );
+			pf = pluralForms(plural);
 		}
 
-		getPluralForm = this.pluralForms[ domain ] = pf;
+		getPluralForm = this.pluralForms[domain] = pf;
 	}
 
-	return getPluralForm( n );
+	return getPluralForm(n);
 };
 
 /**
@@ -177,34 +179,34 @@ Tannin.prototype.getPluralForm = function( domain, n ) {
  *
  * @return {string} Translated string.
  */
-Tannin.prototype.dcnpgettext = function( domain, context, singular, plural, n ) {
+Tannin.prototype.dcnpgettext = function (domain, context, singular, plural, n) {
 	var index, key, entry;
 
-	if ( n === undefined ) {
+	if (n === undefined) {
 		// Default to singular.
 		index = 0;
 	} else {
 		// Find index by evaluating plural form for value.
-		index = this.getPluralForm( domain, n );
+		index = this.getPluralForm(domain, n);
 	}
 
 	key = singular;
 
 	// If provided, context is prepended to key with delimiter.
-	if ( context ) {
+	if (context) {
 		key = context + this.options.contextDelimiter + singular;
 	}
 
-	entry = this.data[ domain ][ key ];
+	entry = this.data[domain][key];
 
 	// Verify not only that entry exists, but that the intended index is within
 	// range and non-empty.
-	if ( entry && entry[ index ] ) {
-		return entry[ index ];
+	if (entry && entry[index]) {
+		return entry[index];
 	}
 
-	if ( this.options.onMissingKey ) {
-		this.options.onMissingKey( singular, domain );
+	if (this.options.onMissingKey) {
+		this.options.onMissingKey(singular, domain);
 	}
 
 	// If entry not found, fall back to singular vs. plural with zero index

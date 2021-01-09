@@ -9,10 +9,10 @@ import compile from '@tannin/compile';
  *
  * @return {Function} Evaluator function.
  */
-export default function pluralForms( expression ) {
-	var evaluate = compile( expression );
+export default function pluralForms(expression) {
+	var evaluate = compile(expression);
 
-	return function( n ) {
-		return +evaluate( { n: n } );
+	return function (n) {
+		return +evaluate({ n: n });
 	};
 }

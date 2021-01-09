@@ -20,10 +20,10 @@ import evaluate from '@tannin/evaluate';
  *
  * @return {(variables?:{[variable:string]:*})=>*} Compiled evaluator.
  */
-export default function compile( expression ) {
-	var terms = postfix( expression );
+export default function compile(expression) {
+	var terms = postfix(expression);
 
-	return function( variables ) {
-		return evaluate( terms, variables );
+	return function (variables) {
+		return evaluate(terms, variables);
 	};
 }
