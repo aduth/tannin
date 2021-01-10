@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-const postfix = require('..');
+import postfix from '../index.js';
 
 const FIXTURES = [
 	{
@@ -73,12 +73,12 @@ const FIXTURES = [
 describe('postfix', () => {
 	describe('fixtures', () => {
 		FIXTURES.forEach(({ input, output }) => {
-			it(input, () => expect(postfix(input)).toEqual(output));
+			it(input, () => expect(postfix(input)).to.deep.equal(output));
 		});
 	});
 
 	it('ignores whitespace', () => {
-		expect(postfix('3 + 4   * 5 / 6')).toEqual([
+		expect(postfix('3 + 4   * 5 / 6')).to.deep.equal([
 			'3',
 			'4',
 			'5',
@@ -91,16 +91,16 @@ describe('postfix', () => {
 
 	it('does not prematurely evaluate prefix operator', () => {
 		// != vs !
-		expect(postfix('n != 1')).toEqual(['n', '1', '!=']);
+		expect(postfix('n != 1')).to.deep.equal(['n', '1', '!=']);
 
 		// >= vs >
-		expect(postfix('n >= 1')).toEqual(['n', '1', '>=']);
+		expect(postfix('n >= 1')).to.deep.equal(['n', '1', '>=']);
 
 		// <= vs <
-		expect(postfix('n <= 1')).toEqual(['n', '1', '<=']);
+		expect(postfix('n <= 1')).to.deep.equal(['n', '1', '<=']);
 	});
 
 	it('handles multi-character operand', () => {
-		expect(postfix('foo != 121')).toEqual(['foo', '121', '!=']);
+		expect(postfix('foo != 121')).to.deep.equal(['foo', '121', '!=']);
 	});
 });

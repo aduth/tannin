@@ -1,10 +1,4 @@
-const Tannin = require('..');
-const pluralForms = require('@tannin/plural-forms');
-
-jest.mock('@tannin/plural-forms', () => {
-	const actual = jest.requireActual('@tannin/plural-forms');
-	return jest.fn().mockImplementation(actual);
-});
+import Tannin from '../index.js';
 
 describe('Tannin', () => {
 	function createInstance(data, options) {
@@ -31,17 +25,9 @@ describe('Tannin', () => {
 	let i18n;
 	beforeEach(() => {
 		i18n = createInstance();
-		pluralForms.mockClear();
 	});
 
 	describe('getPluralForm', () => {
-		it('compiles once', () => {
-			i18n.getPluralForm('default', 2);
-			i18n.getPluralForm('default', 2);
-
-			expect(pluralForms).toHaveBeenCalledTimes(1);
-		});
-
 		it('handles variations of plural forms config', () => {
 			[
 				'nplurals=2; plural=(n != 1);',
@@ -60,9 +46,9 @@ describe('Tannin', () => {
 						},
 					});
 
-					expect(i18n.getPluralForm('default', 0)).toBe(1);
-					expect(i18n.getPluralForm('default', 1)).toBe(0);
-					expect(i18n.getPluralForm('default', 2)).toBe(1);
+					expect(i18n.getPluralForm('default', 0)).to.equal(1);
+					expect(i18n.getPluralForm('default', 1)).to.equal(0);
+					expect(i18n.getPluralForm('default', 2)).to.equal(1);
 				});
 			});
 		});
@@ -72,47 +58,48 @@ describe('Tannin', () => {
 		it('translates singular', () => {
 			const result = i18n.dcnpgettext('default', undefined, 'test');
 
-			expect(result).toBe('Singular');
+			expect(result).to.equal('Singular');
 		});
 
 		it('translates singular with explicit value', () => {
 			const result = i18n.dcnpgettext('default', undefined, 'test', 'tests', 1);
 
-			expect(result).toBe('Singular');
+			expect(result).to.equal('Singular');
 		});
 
 		it('translates plural', () => {
 			const result = i18n.dcnpgettext('default', undefined, 'test', 'tests', 2);
 
-			expect(result).toBe('Plural');
+			expect(result).to.equal('Plural');
 		});
 
 		it('translates with context', () => {
 			const result = i18n.dcnpgettext('default', 'foo', 'test');
 
-			expect(result).toBe('Context Singular');
+			expect(result).to.equal('Context Singular');
 		});
 
 		it('translates with context and custom context delimiter', () => {
 			i18n = createInstance(undefined, { contextDelimiter: '|' });
 			const result = i18n.dcnpgettext('default', 'foo', 'test');
 
-			expect(result).toBe('Custom-Delimited Context Singular');
+			expect(result).to.equal('Custom-Delimited Context Singular');
 		});
 
 		it('returns singular key if not contained in locale data', () => {
-			const onMissingKey = jest.fn();
+			let calledWith;
+			const onMissingKey = (...args) => (calledWith = args);
 			i18n = createInstance(undefined, { onMissingKey });
 			const result = i18n.dcnpgettext('default', undefined, 'untranslated');
 
-			expect(result).toBe('untranslated');
-			expect(onMissingKey).toHaveBeenCalledWith('untranslated', 'default');
+			expect(result).to.equal('untranslated');
+			expect(calledWith).to.deep.equal(['untranslated', 'default']);
 		});
 
 		it('returns singular key if empty result', () => {
 			const result = i18n.dcnpgettext('default', undefined, 'test-empty');
 
-			expect(result).toBe('test-empty');
+			expect(result).to.equal('test-empty');
 		});
 	});
 });

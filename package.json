@@ -1,9 +1,9 @@
 {
 	"name": "@tannin/root",
 	"private": true,
+	"type": "module",
 	"scripts": {
-		"pretest:unit": "npm run build:bundle",
-		"test:unit": "jest",
+		"test:unit": "mocha packages/*/__tests__ --require mocha.config.js",
 		"test:lint": "eslint .",
 		"test:types": "npm run build:types",
 		"test": "npm run test:unit && npm run test:lint && npm run test:types",
@@ -16,11 +16,11 @@
 	"license": "MIT",
 	"devDependencies": {
 		"benchmark": "^2.1.4",
+		"chai": "^4.2.0",
 		"eslint": "^7.17.0",
 		"eslint-config-prettier": "^7.1.0",
 		"eslint-plugin-prettier": "^3.3.1",
 		"jed": "^1.1.1",
-		"jest": "^26.0.1",
 		"lerna": "^3.22.1",
 		"prettier": "^2.2.1",
 		"rimraf": "^3.0.2",
@@ -36,6 +36,7 @@
 		"@tannin/plural-forms": "file:packages/plural-forms",
 		"@tannin/postfix": "file:packages/postfix",
 		"@tannin/sprintf": "file:packages/sprintf",
+		"mocha": "^8.2.1",
 		"tannin": "file:packages/tannin"
 	}
 }

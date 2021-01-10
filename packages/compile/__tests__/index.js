@@ -1,4 +1,4 @@
-const compile = require('..');
+import compile from '../index.js';
 
 const FIXTURES = [
 	[
@@ -55,7 +55,7 @@ describe('compile', () => {
 			describe(expression, () => {
 				for (const [n, expected] of variables) {
 					it('n = ' + n, () => {
-						expect(evaluate({ n })).toEqual(expected);
+						expect(evaluate({ n })).to.deep.equal(expected);
 					});
 				}
 			});

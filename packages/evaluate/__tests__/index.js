@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-const evaluate = require('..');
+import evaluate from '../index.js';
 
 const FIXTURES = [
 	{
@@ -58,7 +58,9 @@ describe('evaluate', () => {
 	describe('fixtures', () => {
 		FIXTURES.forEach(({ source, postfix }) => {
 			// eslint-disable-next-line no-eval
-			it(source, () => expect(evaluate(postfix, {})).toEqual(eval(source)));
+			it(source, () =>
+				expect(evaluate(postfix, {})).to.deep.equal(eval(source))
+			);
 		});
 	});
 });
