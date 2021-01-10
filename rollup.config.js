@@ -1,6 +1,6 @@
 import { join, basename } from 'path';
 import { readdirSync, statSync } from 'fs';
-import { uglify } from 'rollup-plugin-uglify';
+import { terser } from 'rollup-plugin-terser';
 import resolve from 'rollup-plugin-node-resolve';
 
 const PACKAGES_DIR = join('.', 'packages');
@@ -47,7 +47,7 @@ export default packages.reduce((result, pkg) => {
 				file: join(pkgRoot, '/dist/' + pkg + '.min.js'),
 				exports: 'default',
 			},
-			plugins: [resolve(), uglify()],
+			plugins: [resolve(), terser()],
 		},
 	]);
 }, []);
