@@ -1,5 +1,4 @@
-`@tannin/postfix`
-=================
+# `@tannin/postfix`
 
 Given a C expression, returns the equivalent postfix (Reverse Polish) notation terms as an array.
 
@@ -22,7 +21,7 @@ Otherwise, download a pre-built copy from unpkg:
 ```js
 import postfix from '@tannin/postfix';
 
-postfix( 'n > 1' );
+postfix('n > 1');
 // ⇒ [ 'n', '1', '>' ]
 ```
 

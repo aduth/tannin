@@ -1,5 +1,4 @@
-`@tannin/evaluate`
-==================
+# `@tannin/evaluate`
 
 Evaluates the result of an expression given as postfix terms.
 
@@ -21,9 +20,9 @@ Otherwise, download a pre-built copy from unpkg:
 import evaluate from '@tannin/evaluate';
 
 // 3 + 4 * 5 / 6 ⇒ '3 4 5 * 6 / +'
-const terms = [ '3', '4', '5', '*', '6', '/', '+' ];
+const terms = ['3', '4', '5', '*', '6', '/', '+'];
 
-evaluate( terms, {} );
+evaluate(terms, {});
 // ⇒ 6.333333333333334
 ```
 

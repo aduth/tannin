@@ -1,5 +1,4 @@
-Tannin
-======
+# Tannin
 
 Tannin is a [gettext](https://www.gnu.org/software/gettext/) localization library.
 
@@ -39,18 +38,18 @@ The returned `Tannin` instance includes the fully-qualified `dcnpgettext` functi
 ```js
 import Tannin from 'tannin';
 
-const i18n = new Tannin( {
+const i18n = new Tannin({
 	the_domain: {
 		'': {
 			domain: 'the_domain',
 			lang: 'en',
 			plural_forms: 'nplurals=2; plural=(n != 1);',
 		},
-		example: [ 'singular translation', 'plural translation' ],
+		example: ['singular translation', 'plural translation'],
 	},
-} );
+});
 
-i18n.dcnpgettext( 'the_domain', undefined, 'example' );
+i18n.dcnpgettext('the_domain', undefined, 'example');
 // ⇒ 'singular translation'
 ```
 
@@ -59,19 +58,19 @@ Tannin accepts `plural_forms` both as a standard [gettext plural forms string](h
 For example, consider the following "default" English (untranslated) initialization:
 
 ```js
-const i18n = new Tannin( {
+const i18n = new Tannin({
 	messages: {
 		'': {
 			domain: 'messages',
-			plural_forms: ( n ) => n === 1 ? 0 : 1,
+			plural_forms: (n) => (n === 1 ? 0 : 1),
 		},
 	},
-} );
+});
 
-i18n.dcnpgettext( 'messages', undefined, 'example', 'examples', 1 );
+i18n.dcnpgettext('messages', undefined, 'example', 'examples', 1);
 // ⇒ 'example'
 
-i18n.dcnpgettext( 'messages', undefined, 'example', 'examples', 2 );
+i18n.dcnpgettext('messages', undefined, 'example', 'examples', 2);
 // ⇒ 'examples'
 ```
 
@@ -82,7 +81,7 @@ For a more human-friendly API, or to more easily transition an existing project,
 ```js
 import Jed from '@tannin/compat';
 
-const i18n = new Jed( {
+const i18n = new Jed({
 	locale_data: {
 		the_domain: {
 			'': {
@@ -90,13 +89,13 @@ const i18n = new Jed( {
 				lang: 'en',
 				plural_forms: 'nplurals=2; plural=(n != 1);',
 			},
-			example: [ 'singular translation', 'plural translation' ],
+			example: ['singular translation', 'plural translation'],
 		},
 	},
 	domain: 'the_domain',
-} );
+});
 
-i18n.translate( 'example' ).fetch();
+i18n.translate('example').fetch();
 // ⇒ 'singular translation'
 ```
 

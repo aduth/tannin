@@ -1,5 +1,4 @@
-`@tannin/plural-forms`
-======================
+# `@tannin/plural-forms`
 
 Compiles a function to compute the plural forms index for a given value.
 
@@ -22,12 +21,12 @@ Otherwise, download a pre-built copy from unpkg:
 ```js
 import pluralForms from '@tannin/plural-forms';
 
-const evaluate = pluralForms( 'n > 1' );
+const evaluate = pluralForms('n > 1');
 
-evaluate( 2 );
+evaluate(2);
 // ⇒ 1
 
-evaluate( 1 );
+evaluate(1);
 // ⇒ 0
 ```
 

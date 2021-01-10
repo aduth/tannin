@@ -1,5 +1,4 @@
-`@tannin/sprintf`
-=================
+# `@tannin/sprintf`
 
 Given a format string, returns string with arguments interpolatation. Arguments can either be provided directly via function arguments spread, or with an array as the second argument.
 
@@ -37,7 +36,7 @@ Using positional arguments:
 ```js
 import sprintf from '@tannin/sprintf';
 
-sprintf( 'Hello %s!', 'world' );
+sprintf('Hello %s!', 'world');
 // ⇒ 'Hello world!'
 ```
 
@@ -46,13 +45,14 @@ Using named arguments:
 ```js
 import sprintf from '@tannin/sprintf';
 
-sprintf( 'Hello %(place)s! From %(name)s.', { place: 'world', name: 'Andrew' } )
+sprintf('Hello %(place)s! From %(name)s.', { place: 'world', name: 'Andrew' });
 // ⇒ 'Hello world! From Andrew.'
 ```
 
 ## Type coercions and default values
 
 When replacing numeric types (`%d` and `%f`), values will be coerced to numeric values, and default to 0:
+
 - `sprintf( '%d', 123 )` returns `'123'`
 - `sprintf( '%d', '123' )` returns `'123'`
 - `sprintf( '%d', 'string' )` returns `'0'`
@@ -61,6 +61,7 @@ When replacing numeric types (`%d` and `%f`), values will be coerced to numeric 
 - `sprintf( '%d', undefined )` returns `'0'`
 
 When replacing string types (`%s`), values will be coerced to strings, and nullish values will be replaced with `''`:
+
 - `sprintf( '%s', 'string' )` returns `'string'`
 - `sprintf( '%s', 0 )` returns `'0'`
 - `sprintf( '%s', false )` returns `'false'`

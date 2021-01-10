@@ -1,5 +1,4 @@
-`@tannin/compile`
-=================
+# `@tannin/compile`
 
 Compiles an evaluating function for a C expression.
 
@@ -20,9 +19,9 @@ Otherwise, download a pre-built copy from unpkg:
 ```js
 import compile from '@tannin/compile';
 
-const evaluate = compile( 'n > 1' );
+const evaluate = compile('n > 1');
 
-evaluate( { n: 2 } );
+evaluate({ n: 2 });
 // ⇒ true
 ```
 
