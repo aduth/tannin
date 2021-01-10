@@ -2,10 +2,10 @@
   "name": "@tannin/root",
   "private": true,
   "scripts": {
+    "pretest:unit": "npm run build:bundle",
     "test:unit": "jest",
     "test:lint": "eslint .",
     "test:types": "npm run build:types",
-    "pretest": "npm run build:bundle",
     "test": "npm run test:unit && npm run test:lint && npm run test:types",
     "build:bundle": "rollup -c",
     "prebuild:types": "tsc --build --clean",
