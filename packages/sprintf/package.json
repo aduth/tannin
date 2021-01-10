@@ -1,9 +1,16 @@
 {
 	"name": "@tannin/sprintf",
 	"version": "1.2.0",
+	"type": "module",
 	"description": "printf string formatter",
 	"main": "build/index.js",
 	"module": "index.js",
+	"exports": {
+		".": {
+			"import": "./index.js",
+			"require": "./build/index.js"
+		}
+	},
 	"types": "index.d.ts",
 	"keywords": [],
 	"author": {

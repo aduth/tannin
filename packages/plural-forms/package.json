@@ -1,9 +1,16 @@
 {
 	"name": "@tannin/plural-forms",
 	"version": "1.1.0",
+	"type": "module",
 	"description": "Compiles a function to compute the plural forms index for a given value",
 	"main": "build/index.js",
 	"module": "index.js",
+	"exports": {
+		".": {
+			"import": "./index.js",
+			"require": "./build/index.js"
+		}
+	},
 	"types": "index.d.ts",
 	"moduleName": "pluralForms",
 	"keywords": [],

@@ -1,9 +1,16 @@
 {
 	"name": "@tannin/postfix",
 	"version": "1.1.0",
+	"type": "module",
 	"description": "Convert a C expression to an array of postfix terms",
 	"main": "build/index.js",
 	"module": "index.js",
+	"exports": {
+		".": {
+			"import": "./index.js",
+			"require": "./build/index.js"
+		}
+	},
 	"types": "index.d.ts",
 	"keywords": [],
 	"author": {

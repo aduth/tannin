@@ -1,9 +1,16 @@
 {
 	"name": "@tannin/compile",
 	"version": "1.1.0",
+	"type": "module",
 	"description": "Compiles an evaluating function for a C expression",
 	"main": "build/index.js",
 	"module": "index.js",
+	"exports": {
+		".": {
+			"import": "./index.js",
+			"require": "./build/index.js"
+		}
+	},
 	"types": "index.d.ts",
 	"keywords": [],
 	"author": {
