@@ -1,41 +1,41 @@
 {
-  "name": "@tannin/root",
-  "private": true,
-  "scripts": {
-    "pretest:unit": "npm run build:bundle",
-    "test:unit": "jest",
-    "test:lint": "eslint .",
-    "test:types": "npm run build:types",
-    "test": "npm run test:unit && npm run test:lint && npm run test:types",
-    "build:bundle": "rollup -c",
-    "prebuild:types": "tsc --build --clean",
-    "build:types": "tsc --build --verbose",
-    "build": "npm run build:bundle && npm run build:types",
-    "postinstall": "lerna bootstrap"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "benchmark": "^2.1.4",
-    "eslint": "^7.17.0",
-    "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "jed": "^1.1.1",
-    "jest": "^26.0.1",
-    "lerna": "^3.22.1",
-    "prettier": "^2.2.1",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.36.1",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-uglify": "^6.0.4",
-    "typescript": "^4.1.3"
-  },
-  "dependencies": {
-    "@tannin/compat": "file:packages/compat",
-    "@tannin/compile": "file:packages/compile",
-    "@tannin/evaluate": "file:packages/evaluate",
-    "@tannin/plural-forms": "file:packages/plural-forms",
-    "@tannin/postfix": "file:packages/postfix",
-    "@tannin/sprintf": "file:packages/sprintf",
-    "tannin": "file:packages/tannin"
-  }
+	"name": "@tannin/root",
+	"private": true,
+	"scripts": {
+		"pretest:unit": "npm run build:bundle",
+		"test:unit": "jest",
+		"test:lint": "eslint .",
+		"test:types": "npm run build:types",
+		"test": "npm run test:unit && npm run test:lint && npm run test:types",
+		"build:bundle": "rollup -c",
+		"prebuild:types": "tsc --build --clean",
+		"build:types": "tsc --build --verbose",
+		"build": "npm run build:bundle && npm run build:types",
+		"postinstall": "lerna bootstrap"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"benchmark": "^2.1.4",
+		"eslint": "^7.17.0",
+		"eslint-config-prettier": "^7.1.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"jed": "^1.1.1",
+		"jest": "^26.0.1",
+		"lerna": "^3.22.1",
+		"prettier": "^2.2.1",
+		"rimraf": "^3.0.2",
+		"rollup": "^2.36.1",
+		"rollup-plugin-node-resolve": "^5.2.0",
+		"rollup-plugin-uglify": "^6.0.4",
+		"typescript": "^4.1.3"
+	},
+	"dependencies": {
+		"@tannin/compat": "file:packages/compat",
+		"@tannin/compile": "file:packages/compile",
+		"@tannin/evaluate": "file:packages/evaluate",
+		"@tannin/plural-forms": "file:packages/plural-forms",
+		"@tannin/postfix": "file:packages/postfix",
+		"@tannin/sprintf": "file:packages/sprintf",
+		"tannin": "file:packages/tannin"
+	}
 }
