@@ -1,33 +1,33 @@
 {
-  "name": "@tannin/sprintf",
-  "version": "1.2.0",
-  "description": "printf string formatter",
-  "main": "build/index.js",
-  "module": "index.js",
-  "types": "index.d.ts",
-  "keywords": [],
-  "author": {
-    "name": "Andrew Duthie",
-    "email": "andrew@andrewduthie.com",
-    "url": "https://andrewduthie.com"
-  },
-  "homepage": "https://github.com/aduth/tannin",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aduth/tannin.git",
-    "directory": "packages/sprintf"
-  },
-  "bugs": {
-    "url": "https://github.com/aduth/tannin/issues"
-  },
-  "license": "MIT",
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "build",
-    "dist"
-  ],
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@tannin/sprintf",
+	"version": "1.2.0",
+	"description": "printf string formatter",
+	"main": "build/index.js",
+	"module": "index.js",
+	"types": "index.d.ts",
+	"keywords": [],
+	"author": {
+		"name": "Andrew Duthie",
+		"email": "andrew@andrewduthie.com",
+		"url": "https://andrewduthie.com"
+	},
+	"homepage": "https://github.com/aduth/tannin",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/aduth/tannin.git",
+		"directory": "packages/sprintf"
+	},
+	"bugs": {
+		"url": "https://github.com/aduth/tannin/issues"
+	},
+	"license": "MIT",
+	"files": [
+		"index.js",
+		"index.d.ts",
+		"build",
+		"dist"
+	],
+	"publishConfig": {
+		"access": "public"
+	}
 }
