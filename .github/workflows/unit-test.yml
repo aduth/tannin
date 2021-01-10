@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Setup Node.js
         uses: actions/setup-node@v2
       - name: Install dependencies
