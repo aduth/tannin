@@ -14,6 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Restore cache
+        id: restore-cache
         uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -21,6 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
       - name: Install dependencies
+        if: steps.restore-cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Typecheck
         run: npm run test:types
