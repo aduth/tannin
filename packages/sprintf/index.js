@@ -29,7 +29,8 @@
  *
  * @type {RegExp}
  */
-var PATTERN = /%(((\d+)\$)|(\(([$_a-zA-Z][$_a-zA-Z0-9]*)\)))?[ +0#-]*\d*(\.(\d+|\*))?(ll|[lhqL])?([cduxXefgsp%])/g;
+var PATTERN =
+	/%(((\d+)\$)|(\(([$_a-zA-Z][$_a-zA-Z0-9]*)\)))?[ +0#-]*\d*(\.(\d+|\*))?(ll|[lhqL])?([cduxXefgsp%])/g;
 //               ▲         ▲                    ▲       ▲  ▲            ▲           ▲ type
 //               │         │                    │       │  │            └ Length (unsupported)
 //               │         │                    │       │  └ Precision / max width

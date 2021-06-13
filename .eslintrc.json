@@ -1,13 +1,11 @@
 {
 	"root": true,
-	"extends": ["eslint:recommended", "plugin:prettier/recommended"],
-	"plugins": ["prettier"],
+	"extends": ["@aduth/eslint-config/es5"],
 	"parserOptions": {
 		"ecmaVersion": 2015,
 		"sourceType": "module"
 	},
 	"env": {
-		"es6": true,
 		"node": true,
 		"mocha": true
 	},
@@ -15,7 +13,16 @@
 		"expect": true
 	},
 	"rules": {
-		"prettier/prettier": "error",
-		"no-prototype-builtins": "off"
-	}
+		"camelcase": "off"
+	},
+	"overrides": [
+		{
+			"files": ["./*", "**/__tests__/**/*", "**/benchmark/*"],
+			"extends": ["@aduth/eslint-config"],
+			"rules": {
+				"no-console": "off",
+				"camelcase": "off"
+			}
+		}
+	]
 }
