@@ -92,16 +92,7 @@ export default function sprintf(string, args) {
 			i++;
 		}
 
-		if (name !== undefined) {
-			// If it's a named argument, use name.
-			if (
-				args[0] &&
-				typeof args[0] === 'object' &&
-				args[0].hasOwnProperty(name)
-			) {
-				value = args[0][name];
-			}
-		} else {
+		if (name === undefined) {
 			// If not a positional argument, use counter value.
 			if (index === undefined) {
 				index = i;
@@ -111,6 +102,13 @@ export default function sprintf(string, args) {
 
 			// Positional argument.
 			value = args[index - 1];
+		} else if (
+			args[0] &&
+			typeof args[0] === 'object' &&
+			args[0].hasOwnProperty(name)
+		) {
+			// If it's a named argument, use name.
+			value = args[0][name];
 		}
 
 		// Parse as type.
