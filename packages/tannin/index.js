@@ -32,7 +32,7 @@ import pluralForms from '@tannin/plural-forms';
  * array of two string entries respectively representing the singular and plural
  * translation.
  *
- * @typedef {{[key:string]:TanninDomainMetadata|TanninTranslation,'':TanninDomainMetadata|TanninTranslation}} TanninLocaleDomain
+ * @typedef {Record<string,TanninDomainMetadata|TanninTranslation>} TanninLocaleDomain
  */
 
 /**
