@@ -23,6 +23,7 @@
 		"eslint-plugin-prettier": "^4.1.0",
 		"jed": "^1.1.1",
 		"lerna": "^5.1.6",
+		"mocha": "^10.0.0",
 		"prettier": "^2.7.1",
 		"rimraf": "^3.0.2",
 		"rollup": "^2.75.7",
@@ -37,7 +38,6 @@
 		"@tannin/plural-forms": "file:packages/plural-forms",
 		"@tannin/postfix": "file:packages/postfix",
 		"@tannin/sprintf": "file:packages/sprintf",
-		"mocha": "^10.0.0",
 		"tannin": "file:packages/tannin"
 	}
 }
