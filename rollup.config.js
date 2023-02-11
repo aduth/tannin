@@ -1,7 +1,7 @@
 import { join, basename } from 'path';
-import { readdirSync, statSync } from 'fs';
-import { terser } from 'rollup-plugin-terser';
-import resolve from 'rollup-plugin-node-resolve';
+import { readdirSync, readFileSync, statSync } from 'fs';
+import terser from '@rollup/plugin-terser';
+import resolve from '@rollup/plugin-node-resolve';
 
 const PACKAGES_DIR = join('.', 'packages');
 
@@ -11,7 +11,9 @@ const packages = readdirSync(PACKAGES_DIR).filter((file) => {
 
 export default packages.reduce((result, pkg) => {
 	const pkgRoot = join(PACKAGES_DIR, pkg);
-	const manifest = require('./' + join(pkgRoot, 'package.json'));
+	const manifest = JSON.parse(
+		readFileSync('./' + join(pkgRoot, 'package.json'))
+	);
 	const { module, dependencies = {}, moduleName = pkg } = manifest;
 
 	return result.concat([
