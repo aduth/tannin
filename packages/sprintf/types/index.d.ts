@@ -1,8 +1,7 @@
 type Specifiers = {
 	's': string,
 	'd': number,
-	'b': boolean,
-	'D': Date
+	'f': number
 };
 type S = keyof Specifiers;
 

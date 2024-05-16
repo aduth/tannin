@@ -55,7 +55,7 @@ var PATTERN =
  * ```
  * @template {string} T
  * @param {T} string - string printf format string
- * @param {import('./types/index.d').SprintfArgs<T>|import('./types/index.d').SprintfArgs<T>[]|undefined} args String arguments.
+ * @param {import('./types/index.d').SprintfArgs<T>|import('./types/index.d').SprintfArgs<T>[]} args String arguments.
  *
  * @return {string} Formatted string.
  */
