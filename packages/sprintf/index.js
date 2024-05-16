@@ -53,25 +53,18 @@ var PATTERN =
  * sprintf( 'Hello %s!', 'world' );
  * // ⇒ 'Hello world!'
  * ```
- *
- * @param {string}                                   string printf format string
- * @param {...string|string[]|Object<string,string>} [args] String arguments.
+ * @template {string} T
+ * @param {T} string - string printf format string
+ * @param {import('./types/index.d').SprintfArgs<T>|import('./types/index.d').SprintfArgs<T>[]|undefined} args String arguments.
  *
  * @return {string} Formatted string.
  */
-export default function sprintf(string, args) {
-	var i;
+export default function sprintf(string, ...args) {
+	var i = 0;
 
-	if (!Array.isArray(args)) {
-		// Construct a copy of arguments from index one, used for replace
-		// function placeholder substitution.
-		args = new Array(arguments.length - 1);
-		for (i = 1; i < arguments.length; i++) {
-			args[i - 1] = arguments[i];
-		}
+	if (Array.isArray(args[0])) {
+		args = /** @type {import('./types/index.d').SprintfArgs<T>[]} */ args[0];
 	}
-
-	i = 1;
 
 	return string.replace(PATTERN, function () {
 		var index, name, precision, type, value;
@@ -89,14 +82,14 @@ export default function sprintf(string, args) {
 
 		// Asterisk precision determined by peeking / shifting next argument.
 		if (precision === '*') {
-			precision = args[i - 1];
+			precision = args[i];
 			i++;
 		}
 
 		if (name === undefined) {
 			// If not a positional argument, use counter value.
 			if (index === undefined) {
-				index = i;
+				index = i + 1;
 			}
 
 			i++;
