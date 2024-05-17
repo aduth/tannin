@@ -24,18 +24,20 @@
 // THE SOFTWARE.
 
 import Jed from '../index.js';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 
 /* eslint-disable */
 
 (function (Jed) {
 	describe('Property Checks', function () {
 		it('should exist', function () {
-			expect(Jed).to.be.ok;
+			assert(Jed);
 		});
 
 		it('should have a context delimiter as per the gettext spec', function () {
-			expect(Jed.context_delimiter).to.equal('\u0004');
-			expect(Jed.context_delimiter).to.equal(String.fromCharCode(4));
+			assert.equal(Jed.context_delimiter, '\u0004');
+			assert.equal(Jed.context_delimiter, String.fromCharCode(4));
 		});
 	});
 
@@ -100,34 +102,34 @@ import Jed from '../index.js';
 		// Actual tests
 		describe('Instantiation', function () {
 			it('should exist', function () {
-				expect(i18n).to.be.ok;
-				expect(i18n_2).to.be.ok;
-				expect(i18n_3).to.be.ok;
-				expect(_).to.be.ok;
+				assert(i18n);
+				assert(i18n_2);
+				assert(i18n_3);
+				assert(_);
 			});
 		});
 
 		describe('Basic', function () {
 			it('should translate a key that exists in the translation', function () {
-				expect(i18n.gettext('test')).to.equal('test_translation_output');
+				assert.equal(i18n.gettext('test'), 'test_translation_output');
 			});
 
 			it("should just pass through strings that aren't translatable", function () {
-				expect(i18n.gettext('missing')).to.equal('missing');
+				assert.equal(i18n.gettext('missing'), 'missing');
 			});
 
 			it("should translate a key in a locale with plural-forms rules that don't assume n==1 will return 0", function () {
-				expect(i18n_3.gettext('test')).to.equal('test_translation_output3');
+				assert.equal(i18n_3.gettext('test'), 'test_translation_output3');
 			});
 
 			it('should allow you to wrap it as a shorthand function', function () {
-				expect(_('test')).to.equal('test_translation_output2');
-				expect(_('missing')).to.equal('missing');
+				assert.equal(_('test'), 'test_translation_output2');
+				assert.equal(_('missing'), 'missing');
 			});
 
 			it('should have identical output for wrapped and non-wrapped instances', function () {
-				expect(_('test')).to.equal(i18n_2.gettext('test'));
-				expect(_('missing')).to.equal(i18n_2.gettext('missing'));
+				assert.equal(_('test'), i18n_2.gettext('test'));
+				assert.equal(_('missing'), i18n_2.gettext('missing'));
 			});
 
 			it("should not allow you to use domains that don't exist", function () {
@@ -138,13 +140,11 @@ import Jed from '../index.js';
 					});
 					return x;
 				}
-				expect(badCreate).to.throw();
+				assert.throws(badCreate);
 			});
 
 			it('should just pass through translations that are empty strings', function () {
-				expect(_('zero length translation')).to.equal(
-					'zero length translation'
-				);
+				assert.equal(_('zero length translation'), 'zero length translation');
 			});
 
 			it('should call the callback function (if given) when a key is missing', function () {
@@ -158,12 +158,12 @@ import Jed from '../index.js';
 					missing_key_callback: missingKeyCallback,
 				});
 				jedWithCallback.gettext('missing key');
-				expect(callbackCalled).to.equal(true);
+				assert.equal(callbackCalled, true);
 
 				callbackCalled = false;
 				var jedWithoutCallback = new Jed({});
 				jedWithoutCallback.gettext('missing key');
-				expect(callbackCalled).to.equal(false);
+				assert.equal(callbackCalled, false);
 			});
 		});
 	})();
@@ -217,22 +217,22 @@ import Jed from '../index.js';
 			});
 
 			it('should use the correct domain when there are multiple', function () {
-				expect(i18n1.gettext('test')).to.equal('test_1');
-				expect(i18n_2.gettext('test')).to.equal('test_2');
+				assert.equal(i18n1.gettext('test'), 'test_1');
+				assert.equal(i18n_2.gettext('test'), 'test_2');
 			});
 
 			it('should still pass through non-existent keys', function () {
-				expect(i18n1.gettext('nope')).to.equal('nope');
-				expect(i18n_2.gettext('nope again')).to.equal('nope again');
+				assert.equal(i18n1.gettext('nope'), 'nope');
+				assert.equal(i18n_2.gettext('nope again'), 'nope again');
 			});
 
 			it('should reveal the current domain on any instance', function () {
-				expect(i18n1.textdomain()).to.equal('messages_1');
-				expect(i18n_2.textdomain()).to.equal('messages_2');
+				assert.equal(i18n1.textdomain(), 'messages_1');
+				assert.equal(i18n_2.textdomain(), 'messages_2');
 			});
 
 			it('should use `messages` as the default domain if none given', function () {
-				expect(i18n_3.textdomain()).to.equal('messages');
+				assert.equal(i18n_3.textdomain(), 'messages');
 			});
 
 			it('should allow on the fly domain switching', function () {
@@ -240,25 +240,26 @@ import Jed from '../index.js';
 				i18n1.textdomain('messages_2');
 				i18n_2.textdomain('messages_1');
 
-				expect(i18n1.gettext('test')).to.equal('test_2');
-				expect(i18n_2.gettext('test')).to.equal('test_1');
-				expect(i18n1.textdomain()).to.equal('messages_2');
-				expect(i18n_2.textdomain()).to.equal('messages_1');
+				assert.equal(i18n1.gettext('test'), 'test_2');
+				assert.equal(i18n_2.gettext('test'), 'test_1');
+				assert.equal(i18n1.textdomain(), 'messages_2');
+				assert.equal(i18n_2.textdomain(), 'messages_1');
 			});
 
 			describe('#dgettext', function () {
 				it('should have the dgettext function', function () {
-					expect(i18n_3.dgettext).to.be.ok;
+					assert(i18n_3.dgettext);
 				});
 
 				it('should allow you to call the domain on the fly', function () {
-					expect(i18n_3.dgettext('messages_1', 'test')).to.equal('test_1');
-					expect(i18n_3.dgettext('messages_2', 'test')).to.equal('test_2');
+					assert.equal(i18n_3.dgettext('messages_1', 'test'), 'test_1');
+					assert.equal(i18n_3.dgettext('messages_2', 'test'), 'test_2');
 				});
 
 				it('should pass through non-existent keys', function () {
-					expect(i18n_3.dgettext('messages_1', 'nope')).to.equal('nope');
-					expect(i18n_3.dgettext('messages_2', 'nope again')).to.equal(
+					assert.equal(i18n_3.dgettext('messages_1', 'nope'), 'nope');
+					assert.equal(
+						i18n_3.dgettext('messages_2', 'nope again'),
 						'nope again'
 					);
 				});
@@ -270,11 +271,12 @@ import Jed from '../index.js';
 				});
 
 				it('should have the dcgettext function', function () {
-					expect(i18n_4.dcgettext).to.be.ok;
+					assert(i18n_4.dcgettext);
 				});
 
 				it('should ignore categories altogether', function () {
-					expect(i18n_4.dcgettext('messages_1', 'test', 'A_CATEGORY')).to.equal(
+					assert.equal(
+						i18n_4.dcgettext('messages_1', 'test', 'A_CATEGORY'),
 						'test_1'
 					);
 				});
@@ -328,34 +330,41 @@ import Jed from '../index.js';
 
 			describe('#ngettext', function () {
 				it('should have a ngettext function', function () {
-					expect(i18n.ngettext).to.be.ok;
+					assert(i18n.ngettext);
 				});
 
 				it('should choose the correct pluralization translation', function () {
-					expect(
-						i18n.ngettext('test plural %1$d', 'test plural %1$d', 1)
-					).to.equal('test_1_singular %1$d');
-					expect(
-						i18n.ngettext('test plural %1$d', 'test plural %1$d', 2)
-					).to.equal('test_1_plural %1$d');
-					expect(
-						i18n.ngettext('test plural %1$d', 'test plural %1$d', 0)
-					).to.equal('test_1_plural %1$d');
+					assert.equal(
+						i18n.ngettext('test plural %1$d', 'test plural %1$d', 1),
+						'test_1_singular %1$d'
+					);
+					assert.equal(
+						i18n.ngettext('test plural %1$d', 'test plural %1$d', 2),
+						'test_1_plural %1$d'
+					);
+					assert.equal(
+						i18n.ngettext('test plural %1$d', 'test plural %1$d', 0),
+						'test_1_plural %1$d'
+					);
 				});
 
 				it('should still pass through on plurals', function () {
-					expect(
-						i18n.ngettext('Not translated', 'Not translated plural', 1)
-					).to.equal('Not translated');
-					expect(
-						i18n.ngettext('Not translated', 'Not translated plural', 2)
-					).to.equal('Not translated plural');
-					expect(
-						i18n.ngettext('Not translated', 'Not translated plural', 0)
-					).to.equal('Not translated plural');
-					expect(
-						i18n_2.ngettext('Not translated', 'Not translated plural', 3)
-					).to.equal('Not translated plural');
+					assert.equal(
+						i18n.ngettext('Not translated', 'Not translated plural', 1),
+						'Not translated'
+					);
+					assert.equal(
+						i18n.ngettext('Not translated', 'Not translated plural', 2),
+						'Not translated plural'
+					);
+					assert.equal(
+						i18n.ngettext('Not translated', 'Not translated plural', 0),
+						'Not translated plural'
+					);
+					assert.equal(
+						i18n_2.ngettext('Not translated', 'Not translated plural', 3),
+						'Not translated plural'
+					);
 				});
 
 				it('should be able to parse complex pluralization rules', function () {
@@ -365,7 +374,7 @@ import Jed from '../index.js';
 						var plural =
 							i == 1 ? 0 : i % 10 == 2 ? 1 : i % 10 == 3 || i % 10 == 4 ? 2 : 3;
 
-						expect(translation).to.equal('Numerus ' + plural);
+						assert.equal(translation, 'Numerus ' + plural);
 					}
 				});
 			});
@@ -407,81 +416,93 @@ import Jed from '../index.js';
 				});
 
 				it('should have a dngettext function', function () {
-					expect(i18n.dngettext).to.be.ok;
+					assert(i18n.dngettext);
 				});
 
 				it('should pluralize correctly, based on domain rules', function () {
-					expect(
-						i18n.dngettext('messages_3', 'test singular', 'test plural', 1)
-					).to.equal('test_1 singular');
-					expect(
-						i18n.dngettext('messages_3', 'test singular', 'test plural', 2)
-					).to.equal('test_1 plural');
-					expect(
-						i18n.dngettext('messages_3', 'test singular', 'test plural', 0)
-					).to.equal('test_1 plural');
+					assert.equal(
+						i18n.dngettext('messages_3', 'test singular', 'test plural', 1),
+						'test_1 singular'
+					);
+					assert.equal(
+						i18n.dngettext('messages_3', 'test singular', 'test plural', 2),
+						'test_1 plural'
+					);
+					assert.equal(
+						i18n.dngettext('messages_3', 'test singular', 'test plural', 0),
+						'test_1 plural'
+					);
 
-					expect(
-						i18n.dngettext('messages_4', 'test singular', 'test plural', 1)
-					).to.equal('test_2 singular');
-					expect(
-						i18n.dngettext('messages_4', 'test singular', 'test plural', 2)
-					).to.equal('test_2 plural');
-					expect(
-						i18n.dngettext('messages_4', 'test singular', 'test plural', 0)
-					).to.equal('test_2 plural');
+					assert.equal(
+						i18n.dngettext('messages_4', 'test singular', 'test plural', 1),
+						'test_2 singular'
+					);
+					assert.equal(
+						i18n.dngettext('messages_4', 'test singular', 'test plural', 2),
+						'test_2 plural'
+					);
+					assert.equal(
+						i18n.dngettext('messages_4', 'test singular', 'test plural', 0),
+						'test_2 plural'
+					);
 				});
 
 				it('should passthrough non-found keys regardless of pluralization addition', function () {
-					expect(
+					assert.equal(
 						i18n.dngettext(
 							'messages_3',
 							'Not translated',
 							'Not translated plural',
 							1
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.dngettext(
 							'messages_3',
 							'Not translated',
 							'Not translated plural',
 							2
-						)
-					).to.equal('Not translated plural');
-					expect(
+						),
+						'Not translated plural'
+					);
+					assert.equal(
 						i18n.dngettext(
 							'messages_3',
 							'Not translated',
 							'Not translated plural',
 							0
-						)
-					).to.equal('Not translated plural');
+						),
+						'Not translated plural'
+					);
 
-					expect(
+					assert.equal(
 						i18n.dngettext(
 							'messages_4',
 							'Not translated',
 							'Not translated plural',
 							1
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.dngettext(
 							'messages_4',
 							'Not translated',
 							'Not translated plural',
 							2
-						)
-					).to.equal('Not translated plural');
-					expect(
+						),
+						'Not translated plural'
+					);
+					assert.equal(
 						i18n.dngettext(
 							'messages_4',
 							'Not translated',
 							'Not translated plural',
 							0
-						)
-					).to.equal('Not translated plural');
+						),
+						'Not translated plural'
+					);
 				});
 			});
 
@@ -491,117 +512,129 @@ import Jed from '../index.js';
 				});
 
 				it('should more or less ignore the category', function () {
-					expect(
+					assert.equal(
 						i18n.dcngettext(
 							'messages_3',
 							'test singular',
 							'test plural',
 							1,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_1 singular');
-					expect(
+						),
+						'test_1 singular'
+					);
+					assert.equal(
 						i18n.dcngettext(
 							'messages_3',
 							'test singular',
 							'test plural',
 							2,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_1 plural');
-					expect(
+						),
+						'test_1 plural'
+					);
+					assert.equal(
 						i18n.dcngettext(
 							'messages_3',
 							'test singular',
 							'test plural',
 							0,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_1 plural');
+						),
+						'test_1 plural'
+					);
 
-					expect(
+					assert.equal(
 						i18n.dcngettext(
 							'messages_4',
 							'test singular',
 							'test plural',
 							1,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_2 singular');
-					expect(
+						),
+						'test_2 singular'
+					);
+					assert.equal(
 						i18n.dcngettext(
 							'messages_4',
 							'test singular',
 							'test plural',
 							2,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_2 plural');
-					expect(
+						),
+						'test_2 plural'
+					);
+					assert.equal(
 						i18n.dcngettext(
 							'messages_4',
 							'test singular',
 							'test plural',
 							0,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_2 plural');
+						),
+						'test_2 plural'
+					);
 
-					expect(
+					assert.equal(
 						i18n.dcngettext(
 							'messages_3',
 							'Not translated',
 							'Not translated plural',
 							1,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.dcngettext(
 							'messages_3',
 							'Not translated',
 							'Not translated plural',
 							2,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated plural');
-					expect(
+						),
+						'Not translated plural'
+					);
+					assert.equal(
 						i18n.dcngettext(
 							'messages_3',
 							'Not translated',
 							'Not translated plural',
 							0,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated plural');
+						),
+						'Not translated plural'
+					);
 
-					expect(
+					assert.equal(
 						i18n.dcngettext(
 							'messages_4',
 							'Not translated',
 							'Not translated plural',
 							1,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.dcngettext(
 							'messages_4',
 							'Not translated',
 							'Not translated plural',
 							2,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated plural');
-					expect(
+						),
+						'Not translated plural'
+					);
+					assert.equal(
 						i18n.dcngettext(
 							'messages_4',
 							'Not translated',
 							'Not translated plural',
 							0,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated plural');
+						),
+						'Not translated plural'
+					);
 				});
 			});
 
@@ -632,24 +665,26 @@ import Jed from '../index.js';
 				});
 
 				it('should expose the pgettext function', function () {
-					expect(i18n.pgettext).to.be.ok;
+					assert(i18n.pgettext);
 				});
 
 				it('should accept a context and look up a new key using the context_glue', function () {
-					expect(i18n.pgettext('context', 'test context')).to.equal(
+					assert.equal(
+						i18n.pgettext('context', 'test context'),
 						'test_1context'
 					);
 				});
 
 				it('should still pass through missing keys', function () {
-					expect(i18n.pgettext('context', 'Not translated')).to.equal(
+					assert.equal(
+						i18n.pgettext('context', 'Not translated'),
 						'Not translated'
 					);
 				});
 
 				it('should make sure same msgid returns diff results w/ context when appropriate', function () {
-					expect(i18n.gettext('test2')).to.equal('test_2');
-					expect(i18n.pgettext('context', 'test2')).to.equal('test_2context');
+					assert.equal(i18n.gettext('test2'), 'test_2');
+					assert.equal(i18n.pgettext('context', 'test2'), 'test_2context');
 				});
 			});
 
@@ -659,25 +694,29 @@ import Jed from '../index.js';
 				});
 
 				it('should have a dpgettext function', function () {
-					expect(i18n.dpgettext).to.be.ok;
+					assert(i18n.dpgettext);
 				});
 
 				it('should use the domain and the context simultaneously', function () {
-					expect(i18n.dpgettext('messages_3', 'context', 'test')).to.equal(
+					assert.equal(
+						i18n.dpgettext('messages_3', 'context', 'test'),
 						'test_1 context'
 					);
-					expect(i18n.dpgettext('messages_4', 'context', 'test')).to.equal(
+					assert.equal(
+						i18n.dpgettext('messages_4', 'context', 'test'),
 						'test_2 context'
 					);
 				});
 
 				it("should pass through if either the domain, the key or the context isn't found", function () {
-					expect(
-						i18n.dpgettext('messages_3', 'context', 'Not translated')
-					).to.equal('Not translated');
-					expect(
-						i18n.dpgettext('messages_4', 'context', 'Not translated')
-					).to.equal('Not translated');
+					assert.equal(
+						i18n.dpgettext('messages_3', 'context', 'Not translated'),
+						'Not translated'
+					);
+					assert.equal(
+						i18n.dpgettext('messages_4', 'context', 'Not translated'),
+						'Not translated'
+					);
 				});
 			});
 
@@ -687,35 +726,39 @@ import Jed from '../index.js';
 				});
 
 				it('should have a dcpgettext function', function () {
-					expect(i18n.dcpgettext).to.be.ok;
+					assert(i18n.dcpgettext);
 				});
 
 				it('should use the domain and the context simultaneously - ignore the category', function () {
-					expect(
-						i18n.dcpgettext('messages_3', 'context', 'test', 'LC_MESSAGES')
-					).to.equal('test_1 context');
-					expect(
-						i18n.dcpgettext('messages_4', 'context', 'test', 'LC_MESSAGES')
-					).to.equal('test_2 context');
+					assert.equal(
+						i18n.dcpgettext('messages_3', 'context', 'test', 'LC_MESSAGES'),
+						'test_1 context'
+					);
+					assert.equal(
+						i18n.dcpgettext('messages_4', 'context', 'test', 'LC_MESSAGES'),
+						'test_2 context'
+					);
 				});
 
 				it("should pass through if either the domain, the key or the context isn't found", function () {
-					expect(
+					assert.equal(
 						i18n.dcpgettext(
 							'messages_3',
 							'context',
 							'Not translated',
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.dcpgettext(
 							'messages_4',
 							'context',
 							'Not translated',
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated');
+						),
+						'Not translated'
+					);
 				});
 			});
 
@@ -746,46 +789,52 @@ import Jed from '../index.js';
 				});
 
 				it('should have a dcpgettext function', function () {
-					expect(i18n.dcpgettext).to.be.ok;
+					assert(i18n.dcpgettext);
 				});
 
 				it('should handle plurals at the same time as contexts', function () {
-					expect(
-						i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 1)
-					).to.equal('context_plural_1 singular %1$d');
-					expect(
-						i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 2)
-					).to.equal('context_plural_1 plural %1$d');
-					expect(
-						i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 0)
-					).to.equal('context_plural_1 plural %1$d');
+					assert.equal(
+						i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 1),
+						'context_plural_1 singular %1$d'
+					);
+					assert.equal(
+						i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 2),
+						'context_plural_1 plural %1$d'
+					);
+					assert.equal(
+						i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 0),
+						'context_plural_1 plural %1$d'
+					);
 				});
 
 				it('should just pass through on not-found cases', function () {
-					expect(
+					assert.equal(
 						i18n.npgettext(
 							'context',
 							'Not translated',
 							'Not translated plural',
 							1
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.npgettext(
 							'context',
 							'Not translated',
 							'Not translated plural',
 							2
-						)
-					).to.equal('Not translated plural');
-					expect(
+						),
+						'Not translated plural'
+					);
+					assert.equal(
 						i18n.npgettext(
 							'context',
 							'Not translated',
 							'Not translated plural',
 							0
-						)
-					).to.equal('Not translated plural');
+						),
+						'Not translated plural'
+					);
 				});
 			});
 
@@ -795,123 +844,135 @@ import Jed from '../index.js';
 				});
 
 				it('should have a dnpgettext function', function () {
-					expect(i18n.dnpgettext).to.be.ok;
+					assert(i18n.dnpgettext);
 				});
 
 				it('should be able to do a domain, context, and pluralization lookup all at once', function () {
-					expect(
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_3',
 							'context',
 							'test singular',
 							'test plural',
 							1
-						)
-					).to.equal('test_1 context singular');
-					expect(
+						),
+						'test_1 context singular'
+					);
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_3',
 							'context',
 							'test singular',
 							'test plural',
 							2
-						)
-					).to.equal('test_1 context plural');
-					expect(
+						),
+						'test_1 context plural'
+					);
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_3',
 							'context',
 							'test singular',
 							'test plural',
 							0
-						)
-					).to.equal('test_1 context plural');
+						),
+						'test_1 context plural'
+					);
 
-					expect(
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_4',
 							'context',
 							'test singular',
 							'test plural',
 							1
-						)
-					).to.equal('test_2 context singular');
-					expect(
+						),
+						'test_2 context singular'
+					);
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_4',
 							'context',
 							'test singular',
 							'test plural',
 							2
-						)
-					).to.equal('test_2 context plural');
-					expect(
+						),
+						'test_2 context plural'
+					);
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_4',
 							'context',
 							'test singular',
 							'test plural',
 							0
-						)
-					).to.equal('test_2 context plural');
+						),
+						'test_2 context plural'
+					);
 				});
 
 				it("should pass through if everything doesn't point towards a key", function () {
-					expect(
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_3',
 							'context',
 							'Not translated',
 							'Not translated plural',
 							1
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_3',
 							'context',
 							'Not translated',
 							'Not translated plural',
 							2
-						)
-					).to.equal('Not translated plural');
-					expect(
+						),
+						'Not translated plural'
+					);
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_3',
 							'context',
 							'Not translated',
 							'Not translated plural',
 							0
-						)
-					).to.equal('Not translated plural');
+						),
+						'Not translated plural'
+					);
 
-					expect(
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_4',
 							'context',
 							'Not translated',
 							'Not translated plural',
 							1
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_4',
 							'context',
 							'Not translated',
 							'Not translated plural',
 							2
-						)
-					).to.equal('Not translated plural');
-					expect(
+						),
+						'Not translated plural'
+					);
+					assert.equal(
 						i18n.dnpgettext(
 							'messages_4',
 							'context',
 							'Not translated',
 							'Not translated plural',
 							0
-						)
-					).to.equal('Not translated plural');
+						),
+						'Not translated plural'
+					);
 				});
 			});
 
@@ -921,11 +982,11 @@ import Jed from '../index.js';
 				});
 
 				it('should have a dcnpgettext function', function () {
-					expect(i18n.dcnpgettext).to.be.ok;
+					assert(i18n.dcnpgettext);
 				});
 
 				it('should be able to do a domain, context, and pluralization lookup all at once - ignore category', function () {
-					expect(
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_3',
 							'context',
@@ -933,9 +994,10 @@ import Jed from '../index.js';
 							'test plural',
 							1,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_1 context singular');
-					expect(
+						),
+						'test_1 context singular'
+					);
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_3',
 							'context',
@@ -943,9 +1005,10 @@ import Jed from '../index.js';
 							'test plural',
 							2,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_1 context plural');
-					expect(
+						),
+						'test_1 context plural'
+					);
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_3',
 							'context',
@@ -953,10 +1016,11 @@ import Jed from '../index.js';
 							'test plural',
 							0,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_1 context plural');
+						),
+						'test_1 context plural'
+					);
 
-					expect(
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_4',
 							'context',
@@ -964,9 +1028,10 @@ import Jed from '../index.js';
 							'test plural',
 							1,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_2 context singular');
-					expect(
+						),
+						'test_2 context singular'
+					);
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_4',
 							'context',
@@ -974,9 +1039,10 @@ import Jed from '../index.js';
 							'test plural',
 							2,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_2 context plural');
-					expect(
+						),
+						'test_2 context plural'
+					);
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_4',
 							'context',
@@ -984,12 +1050,13 @@ import Jed from '../index.js';
 							'test plural',
 							0,
 							'LC_MESSAGES'
-						)
-					).to.equal('test_2 context plural');
+						),
+						'test_2 context plural'
+					);
 				});
 
 				it("should pass through if everything doesn't point towards a key", function () {
-					expect(
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_3',
 							'context',
@@ -997,9 +1064,10 @@ import Jed from '../index.js';
 							'Not translated plural',
 							1,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_3',
 							'context',
@@ -1007,9 +1075,10 @@ import Jed from '../index.js';
 							'Not translated plural',
 							2,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated plural');
-					expect(
+						),
+						'Not translated plural'
+					);
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_3',
 							'context',
@@ -1017,10 +1086,11 @@ import Jed from '../index.js';
 							'Not translated plural',
 							0,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated plural');
+						),
+						'Not translated plural'
+					);
 
-					expect(
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_4',
 							'context',
@@ -1028,9 +1098,10 @@ import Jed from '../index.js';
 							'Not translated plural',
 							1,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated');
-					expect(
+						),
+						'Not translated'
+					);
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_4',
 							'context',
@@ -1038,9 +1109,10 @@ import Jed from '../index.js';
 							'Not translated plural',
 							2,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated plural');
-					expect(
+						),
+						'Not translated plural'
+					);
+					assert.equal(
 						i18n.dcnpgettext(
 							'messages_4',
 							'context',
@@ -1048,8 +1120,9 @@ import Jed from '../index.js';
 							'Not translated plural',
 							0,
 							'LC_MESSAGES'
-						)
-					).to.equal('Not translated plural');
+						),
+						'Not translated plural'
+					);
 				});
 			});
 		});
@@ -1169,83 +1242,93 @@ import Jed from '../index.js';
 			});
 
 			it('should handle a simple gettext passthrough', function () {
-				expect(i18n.translate('test singular').fetch()).to.equal('test_1');
+				assert.equal(i18n.translate('test singular').fetch(), 'test_1');
 			});
 
 			it('should handle changing domains', function () {
-				expect(
+				assert.equal(
 					i18n
 						.translate('test other_domain singular')
 						.onDomain('other_domain')
-						.fetch()
-				).to.equal('other domain test 1');
+						.fetch(),
+					'other domain test 1'
+				);
 			});
 
 			it('should allow you to add plural information in the chain.', function () {
-				expect(
-					i18n.translate('test plural %1$d').ifPlural(5, 'dont matta').fetch()
-				).to.equal('test_1_plural %1$d');
+				assert.equal(
+					i18n.translate('test plural %1$d').ifPlural(5, 'dont matta').fetch(),
+					'test_1_plural %1$d'
+				);
 			});
 
 			it('should take in a sprintf set of args (as array) on the plural lookup', function () {
-				expect(
+				assert.equal(
 					i18n
 						.translate('test plural %1$d')
 						.ifPlural(5, 'dont matta')
-						.fetch([5])
-				).to.equal('test_1_plural 5');
-				expect(
+						.fetch([5]),
+					'test_1_plural 5'
+				);
+				assert.equal(
 					i18n
 						.translate('test plural %1$d %2$d')
 						.ifPlural(5, 'dont matta %1$d %2$d')
-						.fetch([5, 6])
-				).to.equal('dont matta 5 6');
-				expect(
+						.fetch([5, 6]),
+					'dont matta 5 6'
+				);
+				assert.equal(
 					i18n
 						.translate('test plural %1$d %2$d')
 						.ifPlural(1, 'dont matta %1$d %2$d')
-						.fetch([1, 6])
-				).to.equal('test plural 1 6');
+						.fetch([1, 6]),
+					'test plural 1 6'
+				);
 			});
 
 			it('should take in a sprintf set of args (as args) on the plural lookup', function () {
-				expect(
+				assert.equal(
 					i18n
 						.translate('test plural %1$d %2$d')
 						.ifPlural(5, 'dont matta %1$d %2$d')
-						.fetch(5, 6)
-				).to.equal('dont matta 5 6');
-				expect(
+						.fetch(5, 6),
+					'dont matta 5 6'
+				);
+				assert.equal(
 					i18n
 						.translate('test plural %1$d %2$d')
 						.ifPlural(1, 'dont matta %1$d %2$d')
-						.fetch(1, 6)
-				).to.equal('test plural 1 6');
+						.fetch(1, 6),
+					'test plural 1 6'
+				);
 			});
 
 			it('should handle context information.', function () {
-				expect(
-					i18n.translate('test context').withContext('context').fetch()
-				).to.equal('test_1context');
+				assert.equal(
+					i18n.translate('test context').withContext('context').fetch(),
+					'test_1context'
+				);
 			});
 
 			it('should be able to do all at the same time.', function () {
-				expect(
+				assert.equal(
 					i18n
 						.translate('context other plural %1$d')
 						.withContext('context')
 						.onDomain('other_domain')
 						.ifPlural(5, 'ignored %1$d')
-						.fetch(5)
-				).to.equal('context_plural_1 plural 5');
-				expect(
+						.fetch(5),
+					'context_plural_1 plural 5'
+				);
+				assert.equal(
 					i18n
 						.translate('context other plural %1$d')
 						.withContext('context')
 						.onDomain('other_domain')
 						.ifPlural(1, 'ignored %1$d')
-						.fetch(1)
-				).to.equal('context_plural_1 singular 1');
+						.fetch(1),
+					'context_plural_1 singular 1'
+				);
 			});
 		});
 
@@ -1288,11 +1371,11 @@ import Jed from '../index.js';
 
 				for (var i in strings) {
 					// test using new Array
-					expect(Jed.sprintf(i, ['[one]', '[two]'])).to.equal(strings[i]);
-					expect(i18n.sprintf(i, ['[one]', '[two]'])).to.equal(strings[i]);
+					assert.equal(Jed.sprintf(i, ['[one]', '[two]']), strings[i]);
+					assert.equal(i18n.sprintf(i, ['[one]', '[two]']), strings[i]);
 					// test using predefined array
-					expect(Jed.sprintf(i, args)).to.equal(strings[i]);
-					expect(i18n.sprintf(i, args)).to.equal(strings[i]);
+					assert.equal(Jed.sprintf(i, args), strings[i]);
+					assert.equal(i18n.sprintf(i, args), strings[i]);
 				}
 			});
 
@@ -1311,8 +1394,8 @@ import Jed from '../index.js';
 				var arg = '[one]';
 
 				for (var i in strings) {
-					expect(Jed.sprintf(i, arg)).to.equal(strings[i]);
-					expect(i18n.sprintf(i, arg)).to.equal(strings[i]);
+					assert.equal(Jed.sprintf(i, arg), strings[i]);
+					assert.equal(i18n.sprintf(i, arg), strings[i]);
 				}
 			});
 		});

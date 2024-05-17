@@ -6,8 +6,7 @@
 		"sourceType": "module"
 	},
 	"env": {
-		"node": true,
-		"mocha": true
+		"node": true
 	},
 	"globals": {
 		"expect": true

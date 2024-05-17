@@ -21,11 +21,5 @@
 		"esModuleInterop": false,
 		"isolatedModules": true
 	},
-	"exclude": [
-		"**/build",
-		"**/dist",
-		"**/__tests__",
-		"**/benchmark",
-		"**/node_modules"
-	]
+	"exclude": ["**/build", "**/dist", "**/benchmark", "**/node_modules"]
 }
