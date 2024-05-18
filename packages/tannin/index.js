@@ -155,7 +155,7 @@ Tannin.prototype.getPluralForm = function (domain, n) {
 					// Ignore reason: As known, there's no way to document the empty
 					// string property on a key to guarantee this as metadata.
 					// @ts-ignore
-					config.plural_forms
+					config.plural_forms,
 			);
 
 			pf = pluralForms(plural);

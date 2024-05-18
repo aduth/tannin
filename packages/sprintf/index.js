@@ -106,10 +106,10 @@ export default function sprintf(string, args) {
 		} else if (
 			args[0] &&
 			typeof args[0] === 'object' &&
-			args[0].hasOwnProperty(name)
+			/** @type {NonNullable<typeof args[0]>} */ (args[0]).hasOwnProperty(name)
 		) {
 			// If it's a named argument, use name.
-			value = args[0][name];
+			value = /** @type {NonNullable<typeof args[0]>} */ (args[0])[name];
 		}
 
 		// Parse as type.
@@ -122,14 +122,16 @@ export default function sprintf(string, args) {
 		// Apply precision.
 		if (precision !== undefined) {
 			if (type === 'f') {
-				value = value.toFixed(precision);
+				value = /** @type {number} */ (value).toFixed(precision);
 			} else if (type === 's') {
-				value = value.substr(0, precision);
+				value = /** @type {string} */ (value).substr(0, precision);
 			}
 		}
 
 		// To avoid "undefined" concatenation, return empty string if no
 		// placeholder substitution can be performed.
-		return value !== undefined && value !== null ? value : '';
+		return value !== undefined && value !== null
+			? /** @type {string} */ (value)
+			: '';
 	});
 }

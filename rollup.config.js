@@ -12,7 +12,7 @@ const packages = readdirSync(PACKAGES_DIR).filter((file) => {
 export default packages.reduce((result, pkg) => {
 	const pkgRoot = join(PACKAGES_DIR, pkg);
 	const manifest = JSON.parse(
-		readFileSync('./' + join(pkgRoot, 'package.json'))
+		readFileSync('./' + join(pkgRoot, 'package.json')),
 	);
 	const { module, dependencies = {}, moduleName = pkg } = manifest;
 

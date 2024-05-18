@@ -49,7 +49,7 @@ describe('sprintf', () => {
 		assert.equal(sprintf('%1$s & %2$s', 'Family'), 'Family & ');
 		assert.equal(
 			sprintf('%(group1)s & %(group2)s', { group1: 'Family' }),
-			'Family & '
+			'Family & ',
 		);
 	});
 
