@@ -30,13 +30,13 @@
  * @type {RegExp}
  */
 var PATTERN =
-	/%(((\d+)\$)|(\(([$_a-zA-Z][$_a-zA-Z0-9]*)\)))?[ +0#-]*\d*(\.(\d+|\*))?(ll|[lhqL])?([cduxXefgsp%])/g;
-//     ▲         ▲                                 ▲       ▲  ▲            ▲           ▲ type
-//     │         │                                 │       │  │            └ Length (unsupported)
-//     │         │                                 │       │  └ Precision / max width
-//     │         │                                 │       └ Min width (unsupported)
-//     │         │                                 └ Flags (unsupported)
-//     └ Index   └ Name (for named arguments)
+	/%(?:(?:(\d+)\$)|(?:\(([$_a-zA-Z][$_a-zA-Z0-9]*)\)))?[ +0#-]*\d*(?:\.(\d+|\*))?(?:ll|[lhqL])?([cduxXefgsp%])/g;
+//       ▲           ▲                                   ▲       ▲  ▲              ▲             ▲ type
+//       │           │                                   │       │  │              └ Length (unsupported)
+//       │           │                                   │       │  └ Precision / max width
+//       │           │                                   │       └ Min width (unsupported)
+//       │           │                                   └ Flags (unsupported)
+//       └ Index     └ Name (for named arguments)
 
 /**
  * Given a format string, returns string with arguments interpolatation.
@@ -73,13 +73,8 @@ export default function sprintf(string, args) {
 
 	i = 1;
 
-	return string.replace(PATTERN, function () {
-		var index, name, precision, type, value;
-
-		index = arguments[3];
-		name = arguments[5];
-		precision = arguments[7];
-		type = arguments[9];
+	return string.replace(PATTERN, (_match, index, name, precision, type) => {
+		var value;
 
 		// There's no placeholder substitution in the explicit "%", meaning it
 		// is not necessary to increment argument index.
