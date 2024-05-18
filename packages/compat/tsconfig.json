@@ -5,6 +5,6 @@
 		"noImplicitAny": false,
 		"noImplicitThis": false
 	},
-	"files": [ "index.js" ],
-	"references": [ { "path": "../sprintf" }, { "path": "../tannin" } ]
+	"files": ["index.js"],
+	"references": [{ "path": "../sprintf" }, { "path": "../tannin" }]
 }

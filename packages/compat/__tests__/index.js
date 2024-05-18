@@ -260,7 +260,7 @@ import assert from 'node:assert/strict';
 					assert.equal(i18n_3.dgettext('messages_1', 'nope'), 'nope');
 					assert.equal(
 						i18n_3.dgettext('messages_2', 'nope again'),
-						'nope again'
+						'nope again',
 					);
 				});
 			});
@@ -277,7 +277,7 @@ import assert from 'node:assert/strict';
 				it('should ignore categories altogether', function () {
 					assert.equal(
 						i18n_4.dcgettext('messages_1', 'test', 'A_CATEGORY'),
-						'test_1'
+						'test_1',
 					);
 				});
 			});
@@ -336,34 +336,34 @@ import assert from 'node:assert/strict';
 				it('should choose the correct pluralization translation', function () {
 					assert.equal(
 						i18n.ngettext('test plural %1$d', 'test plural %1$d', 1),
-						'test_1_singular %1$d'
+						'test_1_singular %1$d',
 					);
 					assert.equal(
 						i18n.ngettext('test plural %1$d', 'test plural %1$d', 2),
-						'test_1_plural %1$d'
+						'test_1_plural %1$d',
 					);
 					assert.equal(
 						i18n.ngettext('test plural %1$d', 'test plural %1$d', 0),
-						'test_1_plural %1$d'
+						'test_1_plural %1$d',
 					);
 				});
 
 				it('should still pass through on plurals', function () {
 					assert.equal(
 						i18n.ngettext('Not translated', 'Not translated plural', 1),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.ngettext('Not translated', 'Not translated plural', 2),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.ngettext('Not translated', 'Not translated plural', 0),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n_2.ngettext('Not translated', 'Not translated plural', 3),
-						'Not translated plural'
+						'Not translated plural',
 					);
 				});
 
@@ -422,28 +422,28 @@ import assert from 'node:assert/strict';
 				it('should pluralize correctly, based on domain rules', function () {
 					assert.equal(
 						i18n.dngettext('messages_3', 'test singular', 'test plural', 1),
-						'test_1 singular'
+						'test_1 singular',
 					);
 					assert.equal(
 						i18n.dngettext('messages_3', 'test singular', 'test plural', 2),
-						'test_1 plural'
+						'test_1 plural',
 					);
 					assert.equal(
 						i18n.dngettext('messages_3', 'test singular', 'test plural', 0),
-						'test_1 plural'
+						'test_1 plural',
 					);
 
 					assert.equal(
 						i18n.dngettext('messages_4', 'test singular', 'test plural', 1),
-						'test_2 singular'
+						'test_2 singular',
 					);
 					assert.equal(
 						i18n.dngettext('messages_4', 'test singular', 'test plural', 2),
-						'test_2 plural'
+						'test_2 plural',
 					);
 					assert.equal(
 						i18n.dngettext('messages_4', 'test singular', 'test plural', 0),
-						'test_2 plural'
+						'test_2 plural',
 					);
 				});
 
@@ -453,27 +453,27 @@ import assert from 'node:assert/strict';
 							'messages_3',
 							'Not translated',
 							'Not translated plural',
-							1
+							1,
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dngettext(
 							'messages_3',
 							'Not translated',
 							'Not translated plural',
-							2
+							2,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.dngettext(
 							'messages_3',
 							'Not translated',
 							'Not translated plural',
-							0
+							0,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 
 					assert.equal(
@@ -481,27 +481,27 @@ import assert from 'node:assert/strict';
 							'messages_4',
 							'Not translated',
 							'Not translated plural',
-							1
+							1,
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dngettext(
 							'messages_4',
 							'Not translated',
 							'Not translated plural',
-							2
+							2,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.dngettext(
 							'messages_4',
 							'Not translated',
 							'Not translated plural',
-							0
+							0,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 				});
 			});
@@ -518,9 +518,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							1,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_1 singular'
+						'test_1 singular',
 					);
 					assert.equal(
 						i18n.dcngettext(
@@ -528,9 +528,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							2,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_1 plural'
+						'test_1 plural',
 					);
 					assert.equal(
 						i18n.dcngettext(
@@ -538,9 +538,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							0,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_1 plural'
+						'test_1 plural',
 					);
 
 					assert.equal(
@@ -549,9 +549,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							1,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_2 singular'
+						'test_2 singular',
 					);
 					assert.equal(
 						i18n.dcngettext(
@@ -559,9 +559,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							2,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_2 plural'
+						'test_2 plural',
 					);
 					assert.equal(
 						i18n.dcngettext(
@@ -569,9 +569,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							0,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_2 plural'
+						'test_2 plural',
 					);
 
 					assert.equal(
@@ -580,9 +580,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							1,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dcngettext(
@@ -590,9 +590,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							2,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.dcngettext(
@@ -600,9 +600,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							0,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 
 					assert.equal(
@@ -611,9 +611,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							1,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dcngettext(
@@ -621,9 +621,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							2,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.dcngettext(
@@ -631,9 +631,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							0,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 				});
 			});
@@ -671,14 +671,14 @@ import assert from 'node:assert/strict';
 				it('should accept a context and look up a new key using the context_glue', function () {
 					assert.equal(
 						i18n.pgettext('context', 'test context'),
-						'test_1context'
+						'test_1context',
 					);
 				});
 
 				it('should still pass through missing keys', function () {
 					assert.equal(
 						i18n.pgettext('context', 'Not translated'),
-						'Not translated'
+						'Not translated',
 					);
 				});
 
@@ -700,22 +700,22 @@ import assert from 'node:assert/strict';
 				it('should use the domain and the context simultaneously', function () {
 					assert.equal(
 						i18n.dpgettext('messages_3', 'context', 'test'),
-						'test_1 context'
+						'test_1 context',
 					);
 					assert.equal(
 						i18n.dpgettext('messages_4', 'context', 'test'),
-						'test_2 context'
+						'test_2 context',
 					);
 				});
 
 				it("should pass through if either the domain, the key or the context isn't found", function () {
 					assert.equal(
 						i18n.dpgettext('messages_3', 'context', 'Not translated'),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dpgettext('messages_4', 'context', 'Not translated'),
-						'Not translated'
+						'Not translated',
 					);
 				});
 			});
@@ -732,11 +732,11 @@ import assert from 'node:assert/strict';
 				it('should use the domain and the context simultaneously - ignore the category', function () {
 					assert.equal(
 						i18n.dcpgettext('messages_3', 'context', 'test', 'LC_MESSAGES'),
-						'test_1 context'
+						'test_1 context',
 					);
 					assert.equal(
 						i18n.dcpgettext('messages_4', 'context', 'test', 'LC_MESSAGES'),
-						'test_2 context'
+						'test_2 context',
 					);
 				});
 
@@ -746,18 +746,18 @@ import assert from 'node:assert/strict';
 							'messages_3',
 							'context',
 							'Not translated',
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dcpgettext(
 							'messages_4',
 							'context',
 							'Not translated',
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated'
+						'Not translated',
 					);
 				});
 			});
@@ -795,15 +795,15 @@ import assert from 'node:assert/strict';
 				it('should handle plurals at the same time as contexts', function () {
 					assert.equal(
 						i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 1),
-						'context_plural_1 singular %1$d'
+						'context_plural_1 singular %1$d',
 					);
 					assert.equal(
 						i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 2),
-						'context_plural_1 plural %1$d'
+						'context_plural_1 plural %1$d',
 					);
 					assert.equal(
 						i18n.npgettext('context', 'context plural %1$d', 'plural %1$d', 0),
-						'context_plural_1 plural %1$d'
+						'context_plural_1 plural %1$d',
 					);
 				});
 
@@ -813,27 +813,27 @@ import assert from 'node:assert/strict';
 							'context',
 							'Not translated',
 							'Not translated plural',
-							1
+							1,
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.npgettext(
 							'context',
 							'Not translated',
 							'Not translated plural',
-							2
+							2,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.npgettext(
 							'context',
 							'Not translated',
 							'Not translated plural',
-							0
+							0,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 				});
 			});
@@ -854,9 +854,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'test singular',
 							'test plural',
-							1
+							1,
 						),
-						'test_1 context singular'
+						'test_1 context singular',
 					);
 					assert.equal(
 						i18n.dnpgettext(
@@ -864,9 +864,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'test singular',
 							'test plural',
-							2
+							2,
 						),
-						'test_1 context plural'
+						'test_1 context plural',
 					);
 					assert.equal(
 						i18n.dnpgettext(
@@ -874,9 +874,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'test singular',
 							'test plural',
-							0
+							0,
 						),
-						'test_1 context plural'
+						'test_1 context plural',
 					);
 
 					assert.equal(
@@ -885,9 +885,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'test singular',
 							'test plural',
-							1
+							1,
 						),
-						'test_2 context singular'
+						'test_2 context singular',
 					);
 					assert.equal(
 						i18n.dnpgettext(
@@ -895,9 +895,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'test singular',
 							'test plural',
-							2
+							2,
 						),
-						'test_2 context plural'
+						'test_2 context plural',
 					);
 					assert.equal(
 						i18n.dnpgettext(
@@ -905,9 +905,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'test singular',
 							'test plural',
-							0
+							0,
 						),
-						'test_2 context plural'
+						'test_2 context plural',
 					);
 				});
 
@@ -918,9 +918,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'Not translated',
 							'Not translated plural',
-							1
+							1,
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dnpgettext(
@@ -928,9 +928,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'Not translated',
 							'Not translated plural',
-							2
+							2,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.dnpgettext(
@@ -938,9 +938,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'Not translated',
 							'Not translated plural',
-							0
+							0,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 
 					assert.equal(
@@ -949,9 +949,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'Not translated',
 							'Not translated plural',
-							1
+							1,
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dnpgettext(
@@ -959,9 +959,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'Not translated',
 							'Not translated plural',
-							2
+							2,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.dnpgettext(
@@ -969,9 +969,9 @@ import assert from 'node:assert/strict';
 							'context',
 							'Not translated',
 							'Not translated plural',
-							0
+							0,
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 				});
 			});
@@ -993,9 +993,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							1,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_1 context singular'
+						'test_1 context singular',
 					);
 					assert.equal(
 						i18n.dcnpgettext(
@@ -1004,9 +1004,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							2,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_1 context plural'
+						'test_1 context plural',
 					);
 					assert.equal(
 						i18n.dcnpgettext(
@@ -1015,9 +1015,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							0,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_1 context plural'
+						'test_1 context plural',
 					);
 
 					assert.equal(
@@ -1027,9 +1027,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							1,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_2 context singular'
+						'test_2 context singular',
 					);
 					assert.equal(
 						i18n.dcnpgettext(
@@ -1038,9 +1038,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							2,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_2 context plural'
+						'test_2 context plural',
 					);
 					assert.equal(
 						i18n.dcnpgettext(
@@ -1049,9 +1049,9 @@ import assert from 'node:assert/strict';
 							'test singular',
 							'test plural',
 							0,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'test_2 context plural'
+						'test_2 context plural',
 					);
 				});
 
@@ -1063,9 +1063,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							1,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dcnpgettext(
@@ -1074,9 +1074,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							2,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.dcnpgettext(
@@ -1085,9 +1085,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							0,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 
 					assert.equal(
@@ -1097,9 +1097,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							1,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated'
+						'Not translated',
 					);
 					assert.equal(
 						i18n.dcnpgettext(
@@ -1108,9 +1108,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							2,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 					assert.equal(
 						i18n.dcnpgettext(
@@ -1119,9 +1119,9 @@ import assert from 'node:assert/strict';
 							'Not translated',
 							'Not translated plural',
 							0,
-							'LC_MESSAGES'
+							'LC_MESSAGES',
 						),
-						'Not translated plural'
+						'Not translated plural',
 					);
 				});
 			});
@@ -1132,7 +1132,7 @@ import assert from 'node:assert/strict';
 			function evalParse(plural_forms) {
 				var pf_re = new RegExp(
 					'^(\\s*nplurals\\s*=\\s*[0-9]+\\s*;\\s*plural\\s*=\\s*(?:\\s|[-\\?\\|&=!<>+*/%:;a-zA-Z0-9_()])+)',
-					'm'
+					'm',
 				);
 				if (pf_re.test(plural_forms)) {
 					var pf = plural_forms;
@@ -1147,7 +1147,7 @@ import assert from 'node:assert/strict';
 					throw new Error(
 						'Syntax error in language file. Plural-Forms header is invalid [' +
 							plural_forms +
-							']'
+							']',
 					);
 				}
 			}
@@ -1251,14 +1251,14 @@ import assert from 'node:assert/strict';
 						.translate('test other_domain singular')
 						.onDomain('other_domain')
 						.fetch(),
-					'other domain test 1'
+					'other domain test 1',
 				);
 			});
 
 			it('should allow you to add plural information in the chain.', function () {
 				assert.equal(
 					i18n.translate('test plural %1$d').ifPlural(5, 'dont matta').fetch(),
-					'test_1_plural %1$d'
+					'test_1_plural %1$d',
 				);
 			});
 
@@ -1268,21 +1268,21 @@ import assert from 'node:assert/strict';
 						.translate('test plural %1$d')
 						.ifPlural(5, 'dont matta')
 						.fetch([5]),
-					'test_1_plural 5'
+					'test_1_plural 5',
 				);
 				assert.equal(
 					i18n
 						.translate('test plural %1$d %2$d')
 						.ifPlural(5, 'dont matta %1$d %2$d')
 						.fetch([5, 6]),
-					'dont matta 5 6'
+					'dont matta 5 6',
 				);
 				assert.equal(
 					i18n
 						.translate('test plural %1$d %2$d')
 						.ifPlural(1, 'dont matta %1$d %2$d')
 						.fetch([1, 6]),
-					'test plural 1 6'
+					'test plural 1 6',
 				);
 			});
 
@@ -1292,21 +1292,21 @@ import assert from 'node:assert/strict';
 						.translate('test plural %1$d %2$d')
 						.ifPlural(5, 'dont matta %1$d %2$d')
 						.fetch(5, 6),
-					'dont matta 5 6'
+					'dont matta 5 6',
 				);
 				assert.equal(
 					i18n
 						.translate('test plural %1$d %2$d')
 						.ifPlural(1, 'dont matta %1$d %2$d')
 						.fetch(1, 6),
-					'test plural 1 6'
+					'test plural 1 6',
 				);
 			});
 
 			it('should handle context information.', function () {
 				assert.equal(
 					i18n.translate('test context').withContext('context').fetch(),
-					'test_1context'
+					'test_1context',
 				);
 			});
 
@@ -1318,7 +1318,7 @@ import assert from 'node:assert/strict';
 						.onDomain('other_domain')
 						.ifPlural(5, 'ignored %1$d')
 						.fetch(5),
-					'context_plural_1 plural 5'
+					'context_plural_1 plural 5',
 				);
 				assert.equal(
 					i18n
@@ -1327,7 +1327,7 @@ import assert from 'node:assert/strict';
 						.onDomain('other_domain')
 						.ifPlural(1, 'ignored %1$d')
 						.fetch(1),
-					'context_plural_1 singular 1'
+					'context_plural_1 singular 1',
 				);
 			});
 		});
