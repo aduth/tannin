@@ -60,7 +60,7 @@ var DEFAULT_OPTIONS = {
  * @example
  *
  * ```
- * getPluralExpression( 'nplurals=2; plural=(n != 1);' ) === '(n != 1)'
+ * getPluralExpression('nplurals=2; plural=(n != 1);') === '(n != 1)'
  * ```
  *
  * @param {string} pf Locale data plural forms.

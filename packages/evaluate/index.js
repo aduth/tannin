@@ -65,9 +65,9 @@ var OPERATORS = {
  * import evaluate from '@tannin/evaluate';
  *
  * // 3 + 4 * 5 / 6 ⇒ '3 4 5 * 6 / +'
- * const terms = [ '3', '4', '5', '*', '6', '/', '+' ];
+ * const terms = ['3', '4', '5', '*', '6', '/', '+'];
  *
- * evaluate( terms, {} );
+ * evaluate(terms, {});
  * // ⇒ 6.333333333333334
  * ```
  *

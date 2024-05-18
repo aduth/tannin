@@ -50,7 +50,7 @@ var PATTERN =
  * ```js
  * import sprintf from '@tannin/sprintf';
  *
- * sprintf( 'Hello %s!', 'world' );
+ * sprintf('Hello %s!', 'world');
  * // ⇒ 'Hello world!'
  * ```
  *

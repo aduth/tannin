@@ -68,7 +68,7 @@ Chain.prototype.fetch = function (sArr) {
  * ```js
  * import Jed from '@tannin/compat';
  *
- * const i18n = new Jed( {
+ * const i18n = new Jed({
  * 	locale_data: {
  * 		the_domain: {
  * 			'': {
@@ -76,13 +76,13 @@ Chain.prototype.fetch = function (sArr) {
  * 				lang: 'en',
  * 				plural_forms: 'nplurals=2; plural=(n != 1);',
  * 			},
- * 			example: [ 'singular translation', 'plural translation' ],
+ * 			example: ['singular translation', 'plural translation'],
  * 		},
  * 	},
  * 	domain: 'the_domain',
- * } );
+ * });
  *
- * i18n.translate( 'example' ).fetch();
+ * i18n.translate('example').fetch();
  * // ⇒ 'singular translation'
  * ```
  *
