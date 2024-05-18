@@ -12,7 +12,8 @@
 		"expect": true
 	},
 	"rules": {
-		"camelcase": "off"
+		"camelcase": "off",
+		"eqeqeq": ["error", "smart"]
 	},
 	"overrides": [
 		{

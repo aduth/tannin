@@ -125,8 +125,6 @@ export default function sprintf(string, args) {
 
 		// To avoid "undefined" concatenation, return empty string if no
 		// placeholder substitution can be performed.
-		return value !== undefined && value !== null
-			? /** @type {string} */ (value)
-			: '';
+		return value == null ? '' : /** @type {string} */ (value);
 	});
 }
