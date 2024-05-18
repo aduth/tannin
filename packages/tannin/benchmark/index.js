@@ -1,6 +1,6 @@
-const Benchmark = require('benchmark');
-const Tannin = require('..');
-const Jed = require('jed');
+import Benchmark from 'benchmark';
+import Tannin from '../index.js';
+import Jed from 'jed';
 
 const impl = {
 	Tannin: new Tannin({

@@ -1,5 +1,5 @@
-const Benchmark = require('benchmark');
-const evaluate = require('..');
+import Benchmark from 'benchmark';
+import evaluate from '../index.js';
 
 const suite = new Benchmark.Suite();
 
