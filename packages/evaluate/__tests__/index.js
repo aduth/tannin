@@ -1,6 +1,5 @@
-/**
- * Internal dependencies
- */
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 import evaluate from '../index.js';
 
 const FIXTURES = [
@@ -58,9 +57,7 @@ describe('evaluate', () => {
 	describe('fixtures', () => {
 		FIXTURES.forEach(({ source, postfix }) => {
 			// eslint-disable-next-line no-eval
-			it(source, () =>
-				expect(evaluate(postfix, {})).to.deep.equal(eval(source))
-			);
+			it(source, () => assert.deepEqual(evaluate(postfix, {}), eval(source)));
 		});
 	});
 });

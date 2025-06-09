@@ -62,8 +62,8 @@ PATTERN = /<=|>=|==|!=|&&|\|\||\?:|\(|!|\*|\/|%|\+|-|<|>|\?|\)|:/;
  * ```js
  * import postfix from '@tannin/postfix';
  *
- * postfix( 'n > 1' );
- * // ⇒ [ 'n', '1', '>' ]
+ * postfix('n > 1');
+ * // ⇒ ['n', '1', '>']
  * ```
  *
  * @param {string} expression C expression.

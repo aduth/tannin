@@ -4,6 +4,6 @@
 		"rootDir": ".",
 		"noImplicitAny": false
 	},
-	"files": [ "index.js" ],
-	"references": [ { "path": "../compile" } ]
+	"files": ["index.js"],
+	"references": [{ "path": "../compile" }]
 }

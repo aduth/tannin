@@ -1,3 +1,5 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 import compile from '../index.js';
 
 const FIXTURES = [
@@ -55,7 +57,7 @@ describe('compile', () => {
 			describe(expression, () => {
 				for (const [n, expected] of variables) {
 					it('n = ' + n, () => {
-						expect(evaluate({ n })).to.deep.equal(expected);
+						assert.deepEqual(evaluate({ n }), expected);
 					});
 				}
 			});

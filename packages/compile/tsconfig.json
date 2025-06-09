@@ -3,6 +3,6 @@
 	"compilerOptions": {
 		"rootDir": "."
 	},
-	"files": [ "index.js" ],
-	"references": [ { "path": "../evaluate" }, { "path": "../postfix" } ]
+	"files": ["index.js"],
+	"references": [{ "path": "../evaluate" }, { "path": "../postfix" }]
 }

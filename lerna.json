@@ -1,9 +1,5 @@
 {
-	"packages": [
-		"packages/*"
-	],
-	"ignoreChanges": [
-		"**/CHANGELOG.md"
-	],
+	"packages": ["packages/*"],
+	"ignoreChanges": ["**/CHANGELOG.md"],
 	"version": "independent"
 }

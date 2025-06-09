@@ -50,7 +50,7 @@ Chain.prototype.fetch = function (sArr) {
 		this._context,
 		this._key,
 		this._pkey,
-		this._val
+		this._val,
 	);
 
 	if (sArr.length) {
@@ -68,7 +68,7 @@ Chain.prototype.fetch = function (sArr) {
  * ```js
  * import Jed from '@tannin/compat';
  *
- * const i18n = new Jed( {
+ * const i18n = new Jed({
  * 	locale_data: {
  * 		the_domain: {
  * 			'': {
@@ -76,13 +76,13 @@ Chain.prototype.fetch = function (sArr) {
  * 				lang: 'en',
  * 				plural_forms: 'nplurals=2; plural=(n != 1);',
  * 			},
- * 			example: [ 'singular translation', 'plural translation' ],
+ * 			example: ['singular translation', 'plural translation'],
  * 		},
  * 	},
  * 	domain: 'the_domain',
- * } );
+ * });
  *
- * i18n.translate( 'example' ).fetch();
+ * i18n.translate('example').fetch();
  * // ⇒ 'singular translation'
  * ```
  *
@@ -113,7 +113,7 @@ export default function Jed(options) {
 
 	if (options.domain && !this.options.locale_data[this.options.domain]) {
 		throw new Error(
-			'Text domain set to non-existent domain: `' + options.domain + '`'
+			'Text domain set to non-existent domain: `' + options.domain + '`',
 		);
 	}
 
@@ -185,7 +185,7 @@ Jed.prototype.dcnpgettext = function (
 	context,
 	singular_key,
 	plural_key,
-	val
+	val,
 ) {
 	plural_key = plural_key || singular_key;
 	domain = domain || this._textdomain;
@@ -195,7 +195,7 @@ Jed.prototype.dcnpgettext = function (
 		context,
 		singular_key,
 		plural_key,
-		val
+		val,
 	);
 };
 

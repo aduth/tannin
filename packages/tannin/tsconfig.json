@@ -6,6 +6,6 @@
 		"strictNullChecks": false,
 		"noImplicitReturns": false
 	},
-	"files": [ "index.js" ],
-	"references": [ { "path": "../plural-forms" } ]
+	"files": ["index.js"],
+	"references": [{ "path": "../plural-forms" }]
 }

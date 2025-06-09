@@ -4,5 +4,5 @@
 		"rootDir": ".",
 		"noImplicitAny": false
 	},
-	"files": [ "index.js" ]
+	"files": ["index.js"]
 }

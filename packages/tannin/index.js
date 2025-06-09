@@ -60,7 +60,7 @@ var DEFAULT_OPTIONS = {
  * @example
  *
  * ```
- * getPluralExpression( 'nplurals=2; plural=(n != 1);' ) === '(n != 1)'
+ * getPluralExpression('nplurals=2; plural=(n != 1);') === '(n != 1)'
  * ```
  *
  * @param {string} pf Locale data plural forms.
@@ -155,7 +155,7 @@ Tannin.prototype.getPluralForm = function (domain, n) {
 					// Ignore reason: As known, there's no way to document the empty
 					// string property on a key to guarantee this as metadata.
 					// @ts-ignore
-					config.plural_forms
+					config.plural_forms,
 			);
 
 			pf = pluralForms(plural);
