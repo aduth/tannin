@@ -85,5 +85,3 @@ export type SprintfArgs<T extends string> = HasNamedPlaceholders<T> extends true
 	: HasUnnamedPlaceholders<T> extends true
 	? ExtractUnnamedPlaceholders<T>
 	: [];
-
-type A = SprintfArgs<'Hello %1$s, Number %2$d'> | SprintfArgs<'Hello %1$s, Number %2$d'>[]
