@@ -5,6 +5,14 @@ type Specifiers = {
 };
 type S = keyof Specifiers;
 
+type BuildTuple<L extends number, T extends any[] = []> = T['length'] extends L
+	? T
+	: BuildTuple<L, [any, ...T]>;
+
+type Subtract1<N extends number> = BuildTuple<N> extends [any, ...infer Rest]
+	? Rest['length']
+	: never;
+
 type StripEscapedPercents<T extends string> =
 	T extends `${infer Head}%%${infer Tail}`
 		? `${Head}${StripEscapedPercents<Tail>}`
@@ -39,22 +47,24 @@ type ExtractNamedPlaceholders<T extends string> =
 type ExtractPositionalPlaceholders<T extends string> =
 	StripEscapedPercents<T> extends `${any}%${infer Index extends number}$${infer Spec}${infer Rest}`
 		? Spec extends S
-			? [Specifiers[Spec], ...ExtractPositionalPlaceholders<Rest>]
-			: never
-		: [];
+			? {
+					[K in Subtract1<Index>]: Specifiers[Spec];
+			  } & ExtractPositionalPlaceholders<Rest>
+			: ExtractPositionalPlaceholders<Rest>
+		:  unknown[];
 
 type ExtractStaticPrecisionPlaceholders<T extends string> =
 	StripEscapedPercents<T> extends `${any}%.${infer Precision extends number}${infer Spec}${infer Rest}`
 		? Spec extends S
 			? [Specifiers[Spec], ...ExtractStaticPrecisionPlaceholders<Rest>]
-			: ExtractStaticPrecisionPlaceholders<Rest>
+			: never
 		: [];
 
 type ExtractDynamicPrecisionPlaceholder<T extends string> =
 	StripEscapedPercents<T> extends `${any}%.*${infer Spec}${infer Rest}`
 		? Spec extends S
 			? [number, Specifiers[Spec], ...ExtractDynamicPrecisionPlaceholder<Rest>]
-			: ExtractDynamicPrecisionPlaceholder<Rest>
+			: never
 		: [];
 
 type ExtractUnnamedPlaceholders<T extends string> =
@@ -75,3 +85,5 @@ export type SprintfArgs<T extends string> = HasNamedPlaceholders<T> extends true
 	: HasUnnamedPlaceholders<T> extends true
 	? ExtractUnnamedPlaceholders<T>
 	: [];
+
+type A = SprintfArgs<'Hello %1$s, Number %2$d'> | SprintfArgs<'Hello %1$s, Number %2$d'>[]
