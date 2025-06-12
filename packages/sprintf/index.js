@@ -37,6 +37,51 @@ var PATTERN =
 //               │         │                    │       └ Min width (unsupported)
 //               │         │                    └ Flags (unsupported)
 //               └ Index   └ Name (for named arguments)
+/**
+ * Given a format string, returns string with arguments interpolatation.
+ * Arguments can either be provided directly via function arguments spread, or
+ * with an array as the second argument.
+ *
+ * @see https://en.wikipedia.org/wiki/Printf_format_string
+ *
+ * @example
+ *
+ * ```js
+ * import sprintf from '@tannin/sprintf';
+ *
+ * sprintf( 'Hello %s!', 'world' );
+ * // ⇒ 'Hello world!'
+ * ```
+ * @template {string} T
+ * @overload
+ * @param {T} string - string printf format string
+ * @param {...import('./types/index.d').SprintfArgs<T>} args - arguments to interpolate
+ *
+ * @return {string} Formatted string.
+ */
+
+/**
+ * Given a format string, returns string with arguments interpolatation.
+ * Arguments can either be provided directly via function arguments spread, or
+ * with an array as the second argument.
+ *
+ * @see https://en.wikipedia.org/wiki/Printf_format_string
+ *
+ * @example
+ *
+ * ```js
+ * import sprintf from '@tannin/sprintf';
+ *
+ * sprintf( 'Hello %s!', 'world' );
+ * // ⇒ 'Hello world!'
+ * ```
+ * @template {string} T
+ * @overload
+ * @param {T} string - string printf format string
+ * @param {import('./types/index.d').SprintfArgs<T>} args - arguments to interpolate
+ *
+ * @return {string} Formatted string.
+ */
 
 /**
  * Given a format string, returns string with arguments interpolatation.
@@ -55,19 +100,30 @@ var PATTERN =
  * ```
  * @template {string} T
  * @param {T} string - string printf format string
- * @param {import('./types/index.d').SprintfArgs<T>|import('./types/index.d').SprintfArgs<T>[]} args String arguments.
+ * @param {...import('./types/index.d').SprintfArgs<T>} args - arguments to interpolate
  *
  * @return {string} Formatted string.
  */
 export default function sprintf(string, ...args) {
 	var i = 0;
-
 	if (Array.isArray(args[0])) {
-		args = /** @type {import('./types/index.d').SprintfArgs<T>[]} */ args[0];
+		args = /** @type {import('./types/index.d').SprintfArgs<T>[]} */ (
+			/** @type {unknown} */ args[0]
+		);
 	}
 
 	return string.replace(PATTERN, function () {
-		var index, name, precision, type, value;
+		var index,
+			// name needs to be documented as `string | undefined` else value will have tpye unknown.
+			/**
+			 * Name of the argument to substitute, if any.
+			 *
+			 * @type {string | undefined}
+			 */
+			name,
+			precision,
+			type,
+			value;
 
 		index = arguments[3];
 		name = arguments[5];
