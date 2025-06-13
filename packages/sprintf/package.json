@@ -4,14 +4,14 @@
 	"type": "module",
 	"description": "printf string formatter",
 	"main": "build/index.js",
-	"module": "index.js",
+	"module": "src/index.js",
 	"exports": {
 		".": {
-			"import": "./index.js",
+			"import": "./src/index.js",
 			"require": "./build/index.js"
 		}
 	},
-	"types": "index.d.ts",
+	"types": "src/index.d.ts",
 	"keywords": [],
 	"author": {
 		"name": "Andrew Duthie",

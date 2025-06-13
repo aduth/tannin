@@ -55,7 +55,7 @@ var PATTERN =
  * @template {string} T
  * @overload
  * @param {T} string - string printf format string
- * @param {...import('./types/index.d').SprintfArgs<T>} args - arguments to interpolate
+ * @param {...import('../types').SprintfArgs<T>} args - arguments to interpolate
  *
  * @return {string} Formatted string.
  */
@@ -78,7 +78,7 @@ var PATTERN =
  * @template {string} T
  * @overload
  * @param {T} string - string printf format string
- * @param {import('./types/index.d').SprintfArgs<T>} args - arguments to interpolate
+ * @param {import('../types').SprintfArgs<T>} args - arguments to interpolate
  *
  * @return {string} Formatted string.
  */
@@ -100,14 +100,14 @@ var PATTERN =
  * ```
  * @template {string} T
  * @param {T} string - string printf format string
- * @param {...import('./types/index.d').SprintfArgs<T>} args - arguments to interpolate
+ * @param {...import('../types').SprintfArgs<T>} args - arguments to interpolate
  *
  * @return {string} Formatted string.
  */
 export default function sprintf(string, ...args) {
 	var i = 0;
 	if (Array.isArray(args[0])) {
-		args = /** @type {import('./types/index.d').SprintfArgs<T>[]} */ (
+		args = /** @type {import('../types').SprintfArgs<T>[]} */ (
 			/** @type {unknown} */ args[0]
 		);
 	}
