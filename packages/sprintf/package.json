@@ -29,8 +29,8 @@
 	},
 	"license": "MIT",
 	"files": [
-		"index.js",
-		"index.d.ts",
+		"src/index.js",
+		"src/index.d.ts",
 		"types/index.d.ts",
 		"build",
 		"dist"
