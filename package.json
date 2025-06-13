@@ -12,8 +12,9 @@
 		"test": "npm run test:unit && npm run test:lint && npm run test:types",
 		"build:bundle": "rollup -c",
 		"prebuild:types": "tsc --build --clean",
-		"build:types": "tsc --build --verbose",
-		"build": "npm run build:bundle && npm run build:types"
+		"build:types": "tsc --build --verbose && npm run fix-sprintf",
+		"build": "npm run build:bundle && npm run build:types",
+		"fix-sprintf": "node scripts/fix-sprintf.js"
 	},
 	"license": "MIT",
 	"devDependencies": {
