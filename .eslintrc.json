@@ -2,7 +2,7 @@
 	"root": true,
 	"extends": ["@aduth/eslint-config/es5"],
 	"parserOptions": {
-		"ecmaVersion": 2020,
+		"ecmaVersion": 2022,
 		"sourceType": "module"
 	},
 	"env": {
