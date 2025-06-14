@@ -24,5 +24,7 @@ jobs:
       - name: Install dependencies
         if: steps.restore-cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Build Types
+        run: npm run build:types
       - name: Typecheck
         run: npm run test:types
