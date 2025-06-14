@@ -12,15 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Restore cache
         id: restore-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: modules-${{ hashFiles('**/package-lock.json') }}
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
       - name: Install dependencies
         if: steps.restore-cache.outputs.cache-hit != 'true'
         run: npm ci
