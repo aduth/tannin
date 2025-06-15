@@ -132,7 +132,7 @@ sprintf(b, 'world', '!');
 
 // / InCorrect
 // @ts-expect-error - sptintf format expected to be constant and not a dynamic string
-sprintf(a+b, 'world');
+sprintf(a + b, 'world');
 // @ts-expect-error - int expected
 sprintf('Value: %d', false);
 // @ts-expect-error - int expected
@@ -147,4 +147,3 @@ sprintf('Value: %s', false);
 sprintf('Value: %s', null);
 // @ts-expect-error - string expected
 sprintf('Value: %s', undefined);
-

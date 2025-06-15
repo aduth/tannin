@@ -56,7 +56,6 @@ const FIXTURES = [
 describe('evaluate', () => {
 	describe('fixtures', () => {
 		FIXTURES.forEach(({ source, postfix }) => {
-			// eslint-disable-next-line no-eval
 			it(source, () => assert.deepEqual(evaluate(postfix, {}), eval(source)));
 		});
 	});
