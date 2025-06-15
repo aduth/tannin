@@ -1,3 +1,9 @@
+## 1.3.0 (2025-06-15)
+
+New Features
+
+- Improved strict TypeScript type-checking for formatted string arguments. Thanks @USERSATOSHI and @erikyo for your contribution!
+
 ## 1.2.0 (2020-03-07)
 
 New Features
