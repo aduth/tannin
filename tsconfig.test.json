@@ -1,0 +1,9 @@
+{
+	"extends": "./tsconfig.json",
+	"include": ["packages/*/__tests__/*.test.ts"],
+	"exclude": ["node_modules"],
+	"compilerOptions": {
+		"noEmit": true,
+		"strictNullChecks": true
+	}
+}

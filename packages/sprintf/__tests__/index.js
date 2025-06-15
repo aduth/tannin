@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import sprintf from '../index.js';
+import sprintf from '../src/index.js';
 
 describe('sprintf', () => {
 	it('does nothing to a string without placeholders', () => {
