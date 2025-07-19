@@ -1,3 +1,9 @@
+## 1.3.1 (Unreleased)
+
+Bug Fixes
+
+- Fix module loading error in CommonJS contexts.
+
 ## 1.3.0 (2025-06-15)
 
 New Features

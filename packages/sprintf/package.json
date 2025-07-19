@@ -3,12 +3,10 @@
 	"version": "1.3.0",
 	"type": "module",
 	"description": "printf string formatter",
-	"main": "build/index.js",
-	"module": "src/index.js",
 	"exports": {
 		".": {
 			"import": "./src/index.js",
-			"require": "./build/index.js"
+			"require": "./build/index.cjs"
 		}
 	},
 	"types": "src/index.d.ts",

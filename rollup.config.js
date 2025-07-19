@@ -14,15 +14,16 @@ export default packages.reduce((result, pkg) => {
 	const manifest = JSON.parse(
 		readFileSync('./' + join(pkgRoot, 'package.json')),
 	);
-	const { module, dependencies = {}, moduleName = pkg } = manifest;
+	const { exports, dependencies = {}, moduleName = pkg } = manifest;
+	const { import: src } = exports['.'];
 
 	return result.concat([
 		// CommonJS (Node)
 		{
-			input: join(pkgRoot, module),
+			input: join(pkgRoot, src),
 			output: {
 				format: 'cjs',
-				file: join(pkgRoot, '/build/' + basename(module)),
+				file: join(pkgRoot, '/build/' + basename(src, '.js') + '.cjs'),
 				exports: 'default',
 			},
 			external: Object.keys(dependencies),
@@ -30,7 +31,7 @@ export default packages.reduce((result, pkg) => {
 
 		// IIFE (Browser)
 		{
-			input: join(pkgRoot, module),
+			input: join(pkgRoot, src),
 			output: {
 				format: 'iife',
 				name: moduleName,
@@ -42,7 +43,7 @@ export default packages.reduce((result, pkg) => {
 
 		// IIFE (Browser, Minified)
 		{
-			input: join(pkgRoot, module),
+			input: join(pkgRoot, src),
 			output: {
 				format: 'iife',
 				name: moduleName,
