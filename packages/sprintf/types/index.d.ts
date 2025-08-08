@@ -1,87 +1,267 @@
+// ---- Base Types ----
+
 type Specifiers = {
 	s: string;
 	d: number;
 	f: number;
 };
+
 type S = keyof Specifiers;
 
+// ---- Tuple Math Utilities ----
+
+// Builds a tuple of length L
 type BuildTuple<L extends number, T extends any[] = []> = T['length'] extends L
 	? T
 	: BuildTuple<L, [any, ...T]>;
 
-type Subtract1<N extends number> = BuildTuple<N> extends [any, ...infer Rest]
-	? Rest['length']
+// Subtracts 1 from a number
+type Subtract1<N extends number> =
+	BuildTuple<N> extends [any, ...infer Rest] ? Rest['length'] : never;
+
+// Adds two numbers by building and merging tuples
+type Add<A extends number, B extends number> = [
+	...BuildTuple<A>,
+	...BuildTuple<B>,
+]['length'] extends number
+	? [...BuildTuple<A>, ...BuildTuple<B>]['length']
 	: never;
 
+// Removes escaped double-percent (%%) sequences from a format string
 type StripEscapedPercents<T extends string> =
 	T extends `${infer Head}%%${infer Tail}`
 		? `${Head}${StripEscapedPercents<Tail>}`
 		: T;
 
-type HasNamedPlaceholders<T extends string> =
-	StripEscapedPercents<T> extends `${any}%(${string})${S}${string}`
-		? true
-		: false;
+// ---- Specifier Utilities ----
 
-type HasPositionalPlaceholders<T extends string> =
-	StripEscapedPercents<T> extends `${any}%${number}$${S}${string}`
-		? true
-		: false;
+// Checks if a character is a valid format specifier
+type IsValidSpec<C extends string> = C extends S ? C : never;
 
-type HasUnnamedPlaceholders<T extends string> =
-	StripEscapedPercents<T> extends `${any}%${S}${string}` ? true : false;
+type DigitChar = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
 
-type HasDynamicPrecisionPlaceholders<T extends string> =
-	StripEscapedPercents<T> extends `${any}%.*${S}${any}` ? true : false;
+// Extracts leading digits from a string, returns [digits, rest of string]
+type ExtractDigits<
+	T extends string,
+	Acc extends string = '',
+> = T extends `${infer First}${infer Rest}`
+	? First extends DigitChar
+		? ExtractDigits<Rest, `${Acc}${First}`>
+		: [Acc, `${First}${Rest}`]
+	: [Acc, ''];
 
-type HasStaticPrecisionPlaceholders<T extends string> =
-	StripEscapedPercents<T> extends `${any}%.${number}${S}${any}` ? true : false;
+// ---- Format Specifier Parsing ----
 
-type ExtractNamedPlaceholders<T extends string> =
-	StripEscapedPercents<T> extends `${any}%(${infer Key})${infer Spec}${infer Rest}`
-		? Spec extends S
-			? { [K in Key]: Specifiers[Spec] } & ExtractNamedPlaceholders<Rest>
+// Parses precision and format specifier, supports dynamic precision (e.g. %.*f)
+type ParsePrecisionAndSpec<T extends string> =
+	T extends `.*${infer RawSpec}${infer Rest}`
+		? IsValidSpec<RawSpec> extends infer Spec extends S
+			? ['.*', Spec, Rest]
 			: never
+		: T extends `.${infer PrecisionAndSpec}`
+			? ExtractDigits<PrecisionAndSpec> extends [
+					infer DigitsStr extends string,
+					infer RestAfterDigits extends string,
+				]
+				? RestAfterDigits extends `${infer RawSpec}${infer Rest}`
+					? IsValidSpec<RawSpec> extends infer Spec extends S
+						? [`.${DigitsStr}`, Spec, Rest]
+						: never
+					: never
+				: never
+			: T extends `${infer RawSpec}${infer Rest}`
+				? IsValidSpec<RawSpec> extends infer Spec extends S
+					? ['', Spec, Rest]
+					: never
+				: never;
+
+// ---- Positional Placeholder Parsing ----
+
+// Extracts a numeric position from format like "2$s"
+type ExtractPositionalNumber<T extends string> =
+	T extends `${infer NumStr}$${infer Rest}`
+		? NumStr extends `${number}`
+			? [NumStr, Rest]
+			: never
+		: never;
+
+// Recursively collects all positional placeholders and their expected types
+type CollectPositionalPlaceholders<
+	T extends string,
+	Collected extends Record<string, any> = {},
+> =
+	StripEscapedPercents<T> extends `${infer _}%${infer AfterPercent}`
+		? ExtractPositionalNumber<AfterPercent> extends never
+			? Collected
+			: ExtractPositionalNumber<AfterPercent> extends [
+						infer PosStr extends string,
+						infer AfterPos extends string,
+				  ]
+				? ParsePrecisionAndSpec<AfterPos> extends [
+						infer Precision extends string,
+						infer Spec extends S,
+						infer Rest extends string,
+					]
+					? IsValidSpec<Spec> extends never
+						? never
+						: Precision extends '.*'
+							? CollectPositionalPlaceholders<
+									Rest,
+									Collected & { [K in PosStr]: [number, Specifiers[Spec]] }
+								>
+							: CollectPositionalPlaceholders<
+									Rest,
+									Collected & { [K in PosStr]: Specifiers[Spec] }
+								>
+					: CollectPositionalPlaceholders<AfterPos, Collected>
+				: Collected
+		: Collected;
+
+// ---- Positional Argument Extraction ----
+
+// Gets the max index used in positional placeholders
+type GetMaxPosition<T extends Record<string, any>> = {
+	[K in keyof T]: K extends `${infer N extends number}` ? N : never;
+}[keyof T];
+
+// Computes max of a number by building up a tuple
+type Max<N extends number, A extends any[] = []> = [N] extends [
+	Partial<A>['length'],
+]
+	? A['length']
+	: Max<N, [0, ...A]>;
+
+// Builds a final tuple of arguments from the collected positional types
+type BuildPositionalTuple<
+	Collected extends { [K: number]: any },
+	MaxPos extends number,
+	CurrentPos extends number = 1,
+	Result extends any[] = [],
+> =
+	CurrentPos extends Add<MaxPos, 1>
+		? Result
+		: `${CurrentPos}` extends keyof Collected
+			? Collected[`${CurrentPos}`] extends [any, any]
+				? BuildPositionalTuple<
+						Collected,
+						MaxPos,
+						Add<CurrentPos, 1>,
+						[...Result, ...Collected[CurrentPos]]
+					>
+				: BuildPositionalTuple<
+						Collected,
+						MaxPos,
+						Add<CurrentPos, 1>,
+						[...Result, Collected[CurrentPos]]
+					>
+			: BuildPositionalTuple<
+					Collected,
+					MaxPos,
+					Add<CurrentPos, 1>,
+					[...Result, unknown]
+				>;
+
+// Main positional argument extractor
+type ExtractPositionalPlaceholders<T extends string> =
+	CollectPositionalPlaceholders<T> extends infer Collected extends Record<
+		string,
+		any
+	>
+		? keyof Collected extends never
+			? []
+			: Max<GetMaxPosition<Collected>> extends infer MaxPos extends number
+				? BuildPositionalTuple<Collected, MaxPos>
+				: []
+		: [];
+
+// ---- Unnamed Placeholder Extraction ----
+
+// Extracts unnamed placeholders like %s, %.2f, %.*d (ignores positional/named)
+type ExtractUnnamedPlaceholders<T extends string> =
+	StripEscapedPercents<T> extends `${infer _}%${infer AfterPercent}`
+		? AfterPercent extends `${infer _Num}$${infer AfterPositional}`
+			? ExtractUnnamedPlaceholders<AfterPositional> // Skip positional
+			: ParsePrecisionAndSpec<AfterPercent> extends [
+						infer Precision extends string,
+						infer Spec extends S,
+						infer Rest extends string,
+				  ]
+				? [
+						...(Precision extends '.*'
+							? [number, Specifiers[Spec]]
+							: [Specifiers[Spec]]),
+						...ExtractUnnamedPlaceholders<Rest>,
+					]
+				: []
+		: [];
+
+// ---- Named Placeholder Extraction ----
+
+// Extracts named placeholders like %(key)s, %(name).2f
+type ExtractNamedPlaceholders<T extends string> =
+	StripEscapedPercents<T> extends `${infer _}%(${infer Key})${infer AfterKey}`
+		? ParsePrecisionAndSpec<AfterKey> extends [
+				infer Precision extends string,
+				infer Spec extends S,
+				infer Rest extends string,
+			]
+			? Precision extends '.*'
+				? never // Optional: disallow dynamic precision for named
+				: { [K in Key]: Specifiers[Spec] } & ExtractNamedPlaceholders<Rest>
+			: {}
 		: {};
 
-type ExtractPositionalPlaceholders<T extends string> =
-	StripEscapedPercents<T> extends `${any}%${infer Index extends number}$${infer Spec}${infer Rest}`
-		? Spec extends S
-			? {
-					[K in Subtract1<Index>]: Specifiers[Spec];
-			  } & ExtractPositionalPlaceholders<Rest>
-			: ExtractPositionalPlaceholders<Rest>
-		:  unknown[];
+// ---- Format Type Guards ----
 
-type ExtractStaticPrecisionPlaceholders<T extends string> =
-	StripEscapedPercents<T> extends `${any}%.${infer Precision extends number}${infer Spec}${infer Rest}`
-		? Spec extends S
-			? [Specifiers[Spec], ...ExtractStaticPrecisionPlaceholders<Rest>]
-			: never
-		: [];
+// Checks if string has named placeholders
+type HasNamedPlaceholders<T extends string> =
+	StripEscapedPercents<T> extends `${infer _}%(${string})${string}`
+		? true
+		: false;
 
-type ExtractDynamicPrecisionPlaceholder<T extends string> =
-	StripEscapedPercents<T> extends `${any}%.*${infer Spec}${infer Rest}`
-		? Spec extends S
-			? [number, Specifiers[Spec], ...ExtractDynamicPrecisionPlaceholder<Rest>]
-			: never
-		: [];
+// Checks if string has positional placeholders
+type HasPositionalPlaceholders<T extends string> =
+	StripEscapedPercents<T> extends `${infer _Before}%${infer Rest}`
+		? Rest extends `${infer Index}$${infer _After}`
+			? Index extends `${number}`
+				? true
+				: HasPositionalPlaceholders<Rest>
+			: HasPositionalPlaceholders<Rest>
+		: false;
 
-type ExtractUnnamedPlaceholders<T extends string> =
-	StripEscapedPercents<T> extends `${any}%${infer Spec}${infer Rest}`
-		? Spec extends S
-			? [Specifiers[Spec], ...ExtractUnnamedPlaceholders<Rest>]
-			: never
-		: [];
+// Checks if string has unnamed placeholders
+type HasUnnamedPlaceholders<T extends string> =
+	StripEscapedPercents<T> extends `${infer _}%${infer Body}`
+		? Body extends `(${string})${string}` // Named — skip
+			? HasUnnamedPlaceholders<Body>
+			: Body extends `${number}$${string}` // Positional — skip
+				? HasUnnamedPlaceholders<Body>
+				: ParsePrecisionAndSpec<Body> extends [
+							infer _,
+							infer Spec extends S,
+							infer _,
+					  ]
+					? true
+					: HasUnnamedPlaceholders<Body>
+		: false;
 
-export type SprintfArgs<T extends string> = HasNamedPlaceholders<T> extends true
-	? [values: ExtractNamedPlaceholders<T>]
-	: HasDynamicPrecisionPlaceholders<T> extends true
-	? ExtractDynamicPrecisionPlaceholder<T>
-	: HasStaticPrecisionPlaceholders<T> extends true
-	? ExtractStaticPrecisionPlaceholders<T>
-	: HasPositionalPlaceholders<T> extends true
-	? ExtractPositionalPlaceholders<T>
-	: HasUnnamedPlaceholders<T> extends true
-	? ExtractUnnamedPlaceholders<T>
-	: [];
+// ---- Public API ----
+
+// Extracts the argument types required for a sprintf-like string
+export type SprintfArgs<T extends string> =
+	HasNamedPlaceholders<T> extends true
+		? HasPositionalPlaceholders<T> extends true
+			? [never] // Invalid: named + positional
+			: HasUnnamedPlaceholders<T> extends true
+				? [never] // Invalid: named + unnamed
+				: [values: ExtractNamedPlaceholders<T>]
+		: HasPositionalPlaceholders<T> extends true
+			? HasUnnamedPlaceholders<T> extends true
+				? [
+						...ExtractPositionalPlaceholders<T>,
+						...ExtractUnnamedPlaceholders<T>,
+					]
+				: ExtractPositionalPlaceholders<T>
+			: HasUnnamedPlaceholders<T> extends true
+				? ExtractUnnamedPlaceholders<T>
+				: [];
