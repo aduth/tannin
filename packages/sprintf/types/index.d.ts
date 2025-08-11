@@ -23,6 +23,8 @@ type Add<A extends number, B extends number> = [
 	? R
 	: never;
 
+// --- Escaped Percent Handling ----
+
 // Removes escaped double-percent (%%) sequences from a format string
 type StripEscapedPercents<T extends string> =
 	T extends `${infer Head}%%${infer Tail}`
@@ -65,44 +67,31 @@ type ParsePrecisionAndSpec<T extends string> =
 
 // ---- Positional Placeholder Parsing ----
 
-// Extracts a numeric position from format like "2$s"
-type ExtractPositionalNumber<T extends string> =
-	T extends `${infer NumStr}$${infer Rest}`
-		? NumStr extends `${number}`
-			? [NumStr, Rest]
-			: never
-		: never;
-
 // Recursively collects all positional placeholders and their expected types
 type CollectPositionalPlaceholders<
 	T extends string,
 	Collected extends Record<string, any> = {},
 > =
-	StripEscapedPercents<T> extends `${infer _}%${infer AfterPercent}`
-		? ExtractPositionalNumber<AfterPercent> extends never
-			? Collected
-			: ExtractPositionalNumber<AfterPercent> extends [
-						infer PosStr extends string,
-						infer AfterPos extends string,
-				  ]
-				? ParsePrecisionAndSpec<AfterPos> extends [
-						infer Precision extends string,
-						infer Spec extends S,
-						infer Rest extends string,
-					]
-					? IsValidSpec<Spec> extends never
-						? never
-						: Precision extends '.*'
-							? CollectPositionalPlaceholders<
-									Rest,
-									Collected & { [K in PosStr]: [number, Specifiers[Spec]] }
-								>
-							: CollectPositionalPlaceholders<
-									Rest,
-									Collected & { [K in PosStr]: Specifiers[Spec] }
-								>
-					: CollectPositionalPlaceholders<AfterPos, Collected>
-				: Collected
+	StripEscapedPercents<T> extends `${infer _}%${infer PosStr}$${infer AfterPos}`
+		? PosStr extends `${number}`
+			? ParsePrecisionAndSpec<AfterPos> extends [
+					infer Precision extends string,
+					infer Spec extends S,
+					infer Rest extends string,
+				]
+				? IsValidSpec<Spec> extends never
+					? never
+					: Precision extends '.*'
+						? CollectPositionalPlaceholders<
+								Rest,
+								Collected & { [K in PosStr]: [number, Specifiers[Spec]] }
+							>
+						: CollectPositionalPlaceholders<
+								Rest,
+								Collected & { [K in PosStr]: Specifiers[Spec] }
+							>
+				: CollectPositionalPlaceholders<AfterPos, Collected>
+			: Collected
 		: Collected;
 
 // ---- Positional Argument Extraction ----
