@@ -98,6 +98,7 @@ sprintf('Id: %(id)d, price: %(price).2f', {
 	id: 123,
 	price: 45.6789,
 });
+sprintf('precision %0.2f', 1.33);
 
 // / InCorrect
 // @ts-expect-error - argument mismatch, string expected

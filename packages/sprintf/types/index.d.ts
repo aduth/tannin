@@ -15,16 +15,12 @@ type BuildTuple<L extends number, T extends any[] = []> = T['length'] extends L
 	? T
 	: BuildTuple<L, [any, ...T]>;
 
-// Subtracts 1 from a number
-type Subtract1<N extends number> =
-	BuildTuple<N> extends [any, ...infer Rest] ? Rest['length'] : never;
-
 // Adds two numbers by building and merging tuples
 type Add<A extends number, B extends number> = [
 	...BuildTuple<A>,
 	...BuildTuple<B>,
-]['length'] extends number
-	? [...BuildTuple<A>, ...BuildTuple<B>]['length']
+]['length'] extends infer R extends number
+	? R
 	: never;
 
 // Removes escaped double-percent (%%) sequences from a format string
@@ -37,19 +33,6 @@ type StripEscapedPercents<T extends string> =
 
 // Checks if a character is a valid format specifier
 type IsValidSpec<C extends string> = C extends S ? C : never;
-
-type DigitChar = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
-
-// Extracts leading digits from a string, returns [digits, rest of string]
-type ExtractDigits<
-	T extends string,
-	Acc extends string = '',
-> = T extends `${infer First}${infer Rest}`
-	? First extends DigitChar
-		? ExtractDigits<Rest, `${Acc}${First}`>
-		: [Acc, `${First}${Rest}`]
-	: [Acc, ''];
-
 // ---- Format Specifier Parsing ----
 
 // Parses precision and format specifier, supports dynamic precision (e.g. %.*f)
@@ -58,22 +41,27 @@ type ParsePrecisionAndSpec<T extends string> =
 		? IsValidSpec<RawSpec> extends infer Spec extends S
 			? ['.*', Spec, Rest]
 			: never
-		: T extends `.${infer PrecisionAndSpec}`
-			? ExtractDigits<PrecisionAndSpec> extends [
-					infer DigitsStr extends string,
-					infer RestAfterDigits extends string,
-				]
+		: T extends `0.${infer PrecisionAndSpec}${infer RestAfterDigits}`
+			? PrecisionAndSpec extends `${number}`
 				? RestAfterDigits extends `${infer RawSpec}${infer Rest}`
 					? IsValidSpec<RawSpec> extends infer Spec extends S
-						? [`.${DigitsStr}`, Spec, Rest]
+						? [`.${PrecisionAndSpec}`, Spec, Rest]
 						: never
 					: never
 				: never
-			: T extends `${infer RawSpec}${infer Rest}`
-				? IsValidSpec<RawSpec> extends infer Spec extends S
-					? ['', Spec, Rest]
+			: T extends `.${infer PrecisionAndSpec}${infer RestAfterDigits}`
+				? PrecisionAndSpec extends `${number}`
+					? RestAfterDigits extends `${infer RawSpec}${infer Rest}`
+						? IsValidSpec<RawSpec> extends infer Spec extends S
+							? [`.${PrecisionAndSpec}`, Spec, Rest]
+							: never
+						: never
 					: never
-				: never;
+				: T extends `${infer RawSpec}${infer Rest}`
+					? IsValidSpec<RawSpec> extends infer Spec extends S
+						? ['', Spec, Rest]
+						: never
+					: never;
 
 // ---- Positional Placeholder Parsing ----
 
@@ -141,7 +129,7 @@ type BuildPositionalTuple<
 	CurrentPos extends Add<MaxPos, 1>
 		? Result
 		: `${CurrentPos}` extends keyof Collected
-			? Collected[`${CurrentPos}`] extends [any, any]
+			? Collected[CurrentPos] extends [any, any]
 				? BuildPositionalTuple<
 						Collected,
 						MaxPos,
