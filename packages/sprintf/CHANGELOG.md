@@ -1,3 +1,9 @@
+## 1.3.2 (Unreleased)
+
+Bug Fixes
+
+- Improved TypeScript type-checking for some combinations of precision format strings. Thanks @USERSATOSHI for the contribution!
+
 ## 1.3.1 (2025-07-19)
 
 Bug Fixes
