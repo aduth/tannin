@@ -156,7 +156,7 @@ type ExtractPositionalPlaceholders<T extends string> =
 // Extracts unnamed placeholders like %s, %.2f, %.*d (ignores positional/named)
 type ExtractUnnamedPlaceholders<T extends string> =
 	StripEscapedPercents<T> extends `${infer _}%${infer AfterPercent}`
-		? AfterPercent extends `${infer _Num}$${infer AfterPositional}`
+		? AfterPercent extends `${infer _Num extends `${number}`}$${infer AfterPositional}`
 			? ExtractUnnamedPlaceholders<AfterPositional> // Skip positional
 			: ParsePrecisionAndSpec<AfterPercent> extends [
 						infer Precision extends string,
