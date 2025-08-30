@@ -1,6 +1,6 @@
 {
 	"name": "@tannin/sprintf",
-	"version": "1.3.2",
+	"version": "1.3.3",
 	"type": "module",
 	"description": "printf string formatter",
 	"exports": {
