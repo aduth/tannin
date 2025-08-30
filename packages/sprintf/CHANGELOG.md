@@ -1,3 +1,9 @@
+## 1.3.3 (Unreleased)
+
+Bug Fixes
+
+- Fixed TypeScript type-checking for strings with non-positional placeholders followed by a `$` being treated as positional. Thanks @sdnunca for the contribution!
+
 ## 1.3.2 (2025-08-12)
 
 Bug Fixes
