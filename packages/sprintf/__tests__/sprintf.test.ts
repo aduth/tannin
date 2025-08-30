@@ -12,8 +12,7 @@ sprintf('%d %d', [1, 2]);
 sprintf('%f', 1.2);
 sprintf('%f -> %f', 1.2, 1.4);
 sprintf('%f -> %f', [1.2, 1.4]);
-sprintf('Test %s with $ after', 'placeholder');
-sprintf('Test $ before %s', 'placeholder');
+
 // / InCorrect
 // @ts-expect-error - argument mismatch, string expected
 sprintf('Hello %s', 1);
@@ -37,6 +36,8 @@ sprintf('%1$f, %2$f', [1.2, 1.4]);
 sprintf('%2$f, %1$f', 1.2, 1.4);
 sprintf('%2$f, %1$f', [1.2, 1.4]);
 sprintf('Hello %2$d, Number %1$d, Float %3$f', 1, 1, 1.2);
+sprintf('Test %s with $ after', 'placeholder');
+sprintf('Test $ before %s', 'placeholder');
 
 // / InCorrect
 // @ts-expect-error - argument mismatch, string expected
