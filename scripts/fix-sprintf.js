@@ -2,8 +2,8 @@ import { readFile, writeFile } from 'fs/promises';
 
 const content = await readFile('./packages/sprintf/src/index.d.ts', 'utf8'),
 	updatedContent = content.replace(
-		'...args: import("../types").SprintfArgs<T>[]',
-		'...args: import("../types").SprintfArgs<T>',
+		'...args: import("../types/index.d.ts").SprintfArgs<T>[]',
+		'...args: import("../types/index.d.ts").SprintfArgs<T>',
 	);
 
 await writeFile('./packages/sprintf/src/index.d.ts', updatedContent, 'utf8');

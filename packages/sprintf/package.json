@@ -5,6 +5,7 @@
 	"description": "printf string formatter",
 	"exports": {
 		".": {
+			"types": "./src/index.d.ts",
 			"import": "./src/index.js",
 			"require": "./build/index.cjs"
 		}
