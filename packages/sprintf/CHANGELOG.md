@@ -1,3 +1,9 @@
+## 1.3.4 (Unreleased)
+
+Bug Fixes
+
+- Fixed TypeScript types for `sprintf` arguments when using `node16` or `nodenext` module resolution. Thanks @joshualip-plaudit for the contribution!
+
 ## 1.3.3 (2025-08-30)
 
 Bug Fixes
