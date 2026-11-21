@@ -99,10 +99,13 @@ export default function postfix(expression) {
 				}
 			} else if (
 				OPENERS.indexOf(element) >= 0 ||
-				PRECEDENCE[element] < PRECEDENCE[operator]
+				PRECEDENCE[element] < PRECEDENCE[operator] ||
+				(operator === '?' && element === '?:')
 			) {
 				// Push to stack if either an opener or when pop reveals an
-				// element of lower precedence.
+				// element of lower precedence. The conditional operator is
+				// right-associative, so a conditional in the false branch of
+				// another stays nested within it.
 				stack.push(element);
 				break;
 			}
@@ -115,8 +118,12 @@ export default function postfix(expression) {
 			stack.push(operator);
 		}
 
-		// Slice matched fragment from expression to continue match.
-		expression = expression.substr(match.index + operator.length);
+		// Slice matched fragment from expression to continue match. Use the
+		// length of the matched text, since the operator may have been
+		// substituted above (`:` with `?:`).
+		expression = expression.substr(
+			/** @type {number} */ (match.index) + match[0].length,
+		);
 	}
 
 	// Push remainder of operand, if exists, to terms.

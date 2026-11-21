@@ -47,11 +47,7 @@ var OPERATORS = {
 		return a || b;
 	},
 	'?:': function (a, b, c) {
-		if (a) {
-			throw b;
-		}
-
-		return c;
+		return a ? b : c;
 	},
 };
 
@@ -97,11 +93,7 @@ export default function evaluate(postfix, variables) {
 				args[j] = stack.pop();
 			}
 
-			try {
-				value = getOperatorResult.apply(null, args);
-			} catch (earlyReturn) {
-				return earlyReturn;
-			}
+			value = getOperatorResult.apply(null, args);
 		} else if (variables.hasOwnProperty(term)) {
 			value = variables[term];
 		} else {
